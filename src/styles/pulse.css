@@ -48,21 +48,24 @@ html,body{margin:0;padding:0;height:100%}
 --hero-grad:linear-gradient(180deg,#111112 0%,#2a2a2e 18%,#44444a 40%,#5e5e66 60%,#3c3c42 82%,#141415 100%)}
 
 [data-theme="light"]{
---panel:#fbfaf7;
---bg:#f4f2ed;--rail:rgba(255,255,255,.6);--surface:rgba(255,255,255,.78);--surface-2:rgba(255,255,255,.92);
---surface-strong:#ffffff;--overlay:rgba(255,255,255,.94);--tooltip:rgba(26,28,32,.96);--tooltip-ink:#ffffff;
---border:rgba(20,22,28,.1);--border-strong:rgba(20,22,28,.24);--card-shadow:0 1px 2px rgba(20,22,28,.05);
---ink:#16181c;--body:#3d424a;--dim:#6b7078;--faint:#979da6;--mid:#7d838c;
---accent:#0071e3;--on-accent:#ffffff;--on-accent-2:rgba(255,255,255,.78);--on-accent-strong:rgba(255,255,255,.92);--on-accent-soft:rgba(255,255,255,.32);
---accent-hover:#0064c8;--accent-soft:rgba(0,113,227,.1);--accent-faint:rgba(0,113,227,.05);--accent-line:rgba(0,113,227,.3);
---ok:#12794a;--ok-soft:rgba(18,121,74,.12);--warn:#96601a;--warn-soft:rgba(150,96,26,.13);--bad:#b3261e;--bad-soft:rgba(179,38,30,.11);--bad-on-accent:#ffd9d4;--bad-on-accent-ink:#8c2118;--kpi-card:#ffffff;--kpi-ink:#16181c;--kpi-dim:#6b7078;--kpi-up:#12794a;--kpi-down:#b3261e;
---neutral:rgba(20,22,28,.26);--track:rgba(20,22,28,.09);--scrim:rgba(20,22,28,.28);
---pill-bg:#0071e3;--pill-ink:#ffffff;--surface-faint:rgba(255,255,255,.45);
---glass-surface:rgba(255,255,255,.58);--glass-surface-2:rgba(255,255,255,.72);--glass-border:rgba(255,255,255,.5);--glass-highlight:rgba(255,255,255,.7);--glass-shadow:rgba(20,30,45,.22);--glass-tint:rgba(150,190,230,.22);
---flap:linear-gradient(178deg,#ffffff 0%,#f0eee8 49%,#e6e3db 51%,#f6f4ef 100%);--flap-hinge:rgba(20,22,28,.16);--flap-notch:var(--bg);
---glow-a:rgba(0,113,227,.07);--glow-b:rgba(0,113,227,.035);--grid:rgba(20,22,28,.04);--ease:cubic-bezier(.2,.8,.2,1);
---bloom-a:rgba(0,113,227,.30);--bloom-b:rgba(96,190,255,.34);--bloom-c:rgba(158,120,255,.24);--hero-field:rgba(255,255,255,.97);--records-card:rgba(255,255,255,.96);--chip:rgba(255,255,255,.92);--chip-border:rgba(20,22,28,.12);
---hero-grad:linear-gradient(180deg,#eaf2fd 0%,#cfe3fb 18%,#a5cbf7 38%,#74aef2 58%,#a8ccf6 80%,#e6eff9 100%)}
+--ui:"Geist",system-ui,sans-serif;--mono:"Geist",system-ui,sans-serif;--fig-weight:600;--card-r:20px;--cta-r:999px;--chip-r:999px;--r-ctl:999px;--r-md:14px;--r-sm:11px;
+--panel:#fbfcfd;
+--bg:#eef2f4;--rail:rgba(255,255,255,.6);--surface:#ffffff;--surface-2:#f4f7f9;
+--surface-strong:#ffffff;--overlay:rgba(255,255,255,.97);--tooltip:#17374D;--tooltip-ink:#ffffff;
+--border:rgba(23,55,77,.11);--border-strong:rgba(23,55,77,.24);--card-shadow:0 1px 2px rgba(23,55,77,.05);
+--ink:#10222d;--body:#33474f;--dim:#5e717a;--faint:#8a9aa2;--mid:#6f828b;
+--accent:#267985;--on-accent:#ffffff;--on-accent-2:rgba(255,255,255,.78);--on-accent-strong:rgba(255,255,255,.92);--on-accent-soft:rgba(255,255,255,.32);
+--accent-hover:#1f6873;--accent-soft:rgba(38,121,133,.11);--accent-faint:rgba(38,121,133,.05);--accent-line:rgba(38,121,133,.32);
+--accent-fill:linear-gradient(90deg,#17374D 0%,#267985 100%);--accent-glow:0 6px 18px rgba(23,55,77,.18);
+--ok:#1d7a52;--ok-soft:rgba(29,122,82,.11);--warn:#9a5b12;--warn-soft:rgba(154,91,18,.12);--bad:#b4262c;--bad-soft:rgba(180,38,44,.10);--bad-on-accent:#ffd9d4;--bad-on-accent-ink:#8c2118;--info:#2b6f8a;--info-soft:rgba(43,111,138,.10);
+--kpi-card:#ffffff;--kpi-ink:#10222d;--kpi-dim:#5e717a;--kpi-up:#1d7a52;--kpi-down:#b4262c;
+--neutral:rgba(23,55,77,.26);--track:rgba(23,55,77,.09);--scrim:rgba(16,34,45,.28);
+--pill-bg:#17374D;--pill-ink:#ffffff;--surface-faint:#f7f9fa;--rail-active-ink:#17374D;
+--glass-surface:rgba(255,255,255,.62);--glass-surface-2:rgba(255,255,255,.76);--glass-border:rgba(255,255,255,.55);--glass-highlight:rgba(255,255,255,.7);--glass-shadow:rgba(16,34,45,.18);--glass-tint:rgba(74,157,165,.16);
+--flap:linear-gradient(178deg,#ffffff 0%,#eef2f4 49%,#e3e9ec 51%,#f5f8f9 100%);--flap-hinge:rgba(23,55,77,.16);--flap-notch:var(--bg);
+--glow-a:rgba(38,121,133,.07);--glow-b:rgba(23,55,77,.04);--grid:rgba(23,55,77,.04);--ease:cubic-bezier(.2,.8,.2,1);
+--bloom-a:rgba(74,157,165,.30);--bloom-b:rgba(38,121,133,.26);--bloom-c:rgba(23,55,77,.18);--hero-field:rgba(255,255,255,.97);--records-card:rgba(255,255,255,.96);--chip:rgba(255,255,255,.92);--chip-border:rgba(23,55,77,.12);
+--hero-grad:linear-gradient(180deg,#e9f1f4 0%,#cfe2e8 18%,#a8cdd5 38%,#7db3bd 58%,#b6d4da 80%,#eaf1f3 100%)}
 [data-theme="indigo"]{
 --bg:#0a0b13;--rail:rgba(255,255,255,.028);--surface:rgba(255,255,255,.045);--surface-2:rgba(255,255,255,.06);
 --surface-strong:rgba(21,22,32,.72);--overlay:rgba(24,25,36,.92);--tooltip:rgba(30,31,44,.98);--tooltip-ink:#f0f1fa;
@@ -170,8 +173,8 @@ html,body{margin:0;padding:0;height:100%}
 --glow-a:rgba(94,231,154,.06);--glow-b:rgba(59,159,232,.04);--grid:rgba(255,255,255,.02);--ease:cubic-bezier(.2,.8,.2,1);
 --bloom-a:rgba(94,231,154,.36);--bloom-b:rgba(59,159,232,.28);--bloom-c:rgba(240,136,62,.22);--hero-field:#13171a;--records-card:#13171a;--chip:#13171a;--chip-border:rgba(255,255,255,.08);
 --hero-grad:linear-gradient(180deg,#07100b 0%,#0b2616 22%,#10432a 46%,#1a7a48 64%,#0f3a24 84%,#0a0f0c 100%)}
-[data-theme="light"] button[style*="background:var(--ink)"],[data-theme="light"] [style*="background-color:var(--ink)"]{background:#0071e3 !important;color:#fff !important}
-[data-theme="light"] [data-kpi-band]{--on-accent:#16181c;--on-accent-2:#6b7078;--on-accent-strong:#3d424a;--on-accent-soft:rgba(20,22,28,.08)}
+[data-theme="light"] button[style*="background:var(--ink)"],[data-theme="light"] [style*="background-color:var(--ink)"]{background:#17374D !important;color:#fff !important}
+[data-theme="light"] [data-kpi-band]{--on-accent:#10222d;--on-accent-2:#5e717a;--on-accent-strong:#33474f;--on-accent-soft:rgba(23,55,77,.08)}
 [data-theme="light"] [data-kpi-band] > * > div, [data-theme="light"] [data-kpi-band] [style*="var(--kpi-card)"]{box-shadow:0 0 0 1px rgba(20,22,28,.08),0 1px 3px rgba(20,22,28,.05)}
 [data-theme="harbour"] [data-kpi-band]{--on-accent:#f3f5f4;--on-accent-2:#7d8783;--on-accent-strong:#cdd4d0;--on-accent-soft:rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.06)}
 [data-theme="cargo"]{
@@ -272,3 +275,30 @@ nav{scrollbar-width:none}
 @keyframes fadeOutUp{to{opacity:0;transform:translateY(-6px)}}
 @keyframes rowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes tickPulse{0%,55%{opacity:1}78%,100%{opacity:.22}}
+
+/* Hogan Healthcare OS (default). Demo palette: navy #17374D, teal #267985, aqua #4A9DA5.
+   Provisional demo choices, not verified official brand colours. */
+[data-theme="hogan"]{
+--ui:"Geist",system-ui,sans-serif;--mono:"Geist",system-ui,sans-serif;--fig-weight:600;--card-r:22px;--cta-r:999px;--chip-r:999px;--panel:#0d1820;--r-ctl:999px;--r-md:15px;--r-sm:11px;--kpi-band:#0f1c25;--kpi-card:#14242f;--kpi-ink:#eef4f6;--kpi-dim:#93a6b0;--kpi-up:#5cc99a;--kpi-down:#ec5f66;--rail-active:#172833;--rail-active-ink:#6cc3cb;--rail-active-ring:inset 0 1px 0 rgba(255,255,255,.04);
+--bg:#091218;--rail:#0b151c;--surface:#112029;--surface-2:#162732;
+--surface-strong:#14232d;--overlay:rgba(13,24,32,.975);--tooltip:#1a2d39;--tooltip-ink:#eef4f6;
+--border:rgba(214,232,240,.075);--border-strong:rgba(214,232,240,.16);--card-shadow:0 1px 0 rgba(255,255,255,.03) inset;
+--ink:#eef4f6;--body:#c6d4da;--dim:#93a6b0;--faint:#66798a;--mid:#7f939d;
+--accent:#4A9DA5;--on-accent:#04161c;--on-accent-2:rgba(4,22,28,.66);--on-accent-strong:rgba(4,22,28,.86);--on-accent-soft:rgba(4,22,28,.22);
+--accent-hover:#63b3ba;--accent-soft:rgba(74,157,165,.17);--accent-faint:rgba(74,157,165,.075);--accent-line:rgba(74,157,165,.36);
+--accent-fill:linear-gradient(90deg,#4A9DA5 0%,#79c3c9 100%);--accent-glow:0 0 24px rgba(74,157,165,.28);
+--ok:#5cc99a;--ok-soft:rgba(92,201,154,.13);--warn:#e8a454;--warn-soft:rgba(232,164,84,.14);--bad:#ec5f66;--bad-soft:rgba(236,95,102,.14);--bad-on-accent:#5c1418;--bad-on-accent-ink:#4e1014;--info:#7FB8C9;--info-soft:rgba(127,184,201,.14);
+--neutral:rgba(214,232,240,.22);--track:#1d2f3a;--scrim:rgba(3,8,11,.62);
+--pill-bg:#1c3342;--pill-ink:#eef4f6;--surface-faint:#0e1a22;
+--glass-surface:#13232d;--glass-surface-2:#182a35;--glass-border:rgba(214,232,240,.09);--glass-highlight:rgba(255,255,255,.05);--glass-shadow:rgba(0,0,0,.55);--glass-tint:rgba(74,157,165,.09);
+--flap:linear-gradient(178deg,#18293a 0%,#132230 49%,#0e1a25 51%,#152532 100%);--flap-hinge:rgba(0,0,0,.6);--flap-notch:#091218;
+--glow-a:rgba(74,157,165,.07);--glow-b:rgba(38,121,133,.06);--grid:rgba(255,255,255,.02);--ease:cubic-bezier(.2,.8,.2,1);
+--bloom-a:rgba(74,157,165,.36);--bloom-b:rgba(38,121,133,.30);--bloom-c:rgba(23,55,77,.45);--hero-field:#112029;--records-card:#112029;--chip:#112029;--chip-border:rgba(214,232,240,.08);
+--hero-grad:linear-gradient(180deg,#081118 0%,#0c2230 22%,#12384b 46%,#1e6c78 64%,#113243 84%,#09131a 100%)}
+[data-theme="hogan"] [data-kpi-band]{--on-accent:#eef4f6;--on-accent-2:#7f939d;--on-accent-strong:#c6d4da;--on-accent-soft:rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.06)}
+
+/* Hogan brand mark: the left square of the genuine Hogan Healthcare logo (white PNG). */
+.hh-logo-mark{display:block;width:20px;height:20px;background:url(/brand/hogan-logo-white.png) left center/auto 100% no-repeat}
+@keyframes scanBeam{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(64px);opacity:0}}
+@media (max-width:1100px){.hh-explorer{grid-template-columns:1fr !important}}
+@media (max-width:760px){.hh-page{padding:14px 12px 40px !important;gap:12px !important}.hh-page h1{font-size:22px !important}}

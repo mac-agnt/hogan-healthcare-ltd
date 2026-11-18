@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { arr, cat, css, txt } from "../../runtime/template";
 import AgentFace from "../../components/AgentFace";
+import AgentPanel from "../../hogan/AgentPanel";
 
 type Props = { v: any };
 
@@ -227,6 +228,7 @@ export default function Agents({ v }: Props) {
             </div>
           </div>
         </div>
+        {v.agentPanelOn && v.agent?.id && <AgentPanel id={v.agent.id} />}
       </div>
     </>
   );

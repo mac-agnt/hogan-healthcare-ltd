@@ -10,7 +10,6 @@ import RecordsFiles from "./pages/RecordsFiles";
 import RecordsOntology from "./pages/RecordsOntology";
 import Activity from "./pages/Activity";
 import Settings from "./pages/Settings";
-import Dashboard from "./pages/Dashboard";
 import Agents from "./pages/Agents";
 import HeliosMini from "./overlays/HeliosMini";
 import WorkViewer from "./overlays/WorkViewer";
@@ -18,6 +17,11 @@ import AgentStudio from "./overlays/AgentStudio";
 import NewRecordDialog from "./overlays/NewRecordDialog";
 import CommandPalette from "./overlays/CommandPalette";
 import BackgroundGallery from "./overlays/BackgroundGallery";
+import { HoganPage, RecordDrawerHost, ToastHost } from "../hogan/shell";
+import HHDashboard from "../hogan/modules/Dashboard";
+import HHWork from "../hogan/modules/Work";
+import RecordsExplorer from "../hogan/modules/Explorer";
+import { COMPANY } from "../hogan/data";
 
 type Props = { v: any };
 
@@ -32,14 +36,14 @@ export default function AppShell({ v }: Props) {
         <span style={css(v.railThumbStyle)} />
         <div style={css(cat(v.railRowStyle, "margin-bottom:22px"))}>
           <button className={cx("ix0", "ix1")} onClick={v.toggleRail} title={v.railLabel} style={{"width":"36px","height":"36px","flex":"none","border":"0","borderRadius":"var(--cta-r,11px)","background":"var(--accent-fill,var(--accent))","color":"var(--on-accent)","boxShadow":"var(--accent-glow,none)","cursor":"pointer","display":"flex","alignItems":"center","justifyContent":"center","fontSize":"13px","fontWeight":"600","padding":"0","transition":"transform .2s var(--ease)"}}>
-            {"K"}
+            <span className="hh-logo-mark" aria-label="Hogan Healthcare" />
           </button>
           <span style={css(v.brandStyle)}>
-            <span style={{"display":"block","fontSize":"15px","fontWeight":"600","letterSpacing":"-.3px","color":"var(--ink)"}}>
-              {"Kilbride Group"}
+            <span title={COMPANY.app + " · " + COMPANY.poweredBy} style={{"display":"block","fontSize":"14px","fontWeight":"600","letterSpacing":"-.3px","color":"var(--ink)","whiteSpace":"nowrap"}}>
+              {"Hogan Healthcare"}
             </span>
-            <span style={{"display":"block","marginTop":"2px","fontSize":"9px","fontWeight":"500","letterSpacing":".16em","color":"var(--accent)"}}>
-              {"PULSE · OPERATIONS"}
+            <span style={{"display":"block","marginTop":"3px","fontSize":"8px","fontWeight":"500","letterSpacing":".1em","color":"var(--accent)","whiteSpace":"nowrap"}}>
+              {"OS · POWERED BY PULSE"}
             </span>
           </span>
           {v.railOpen && (
@@ -54,6 +58,9 @@ export default function AppShell({ v }: Props) {
         </div>
         {arr(v.nav).map((item: any, i0: number) => (
           <Fragment key={i0}>
+            {item?.isGroup && (
+              <div style={css(item?.groupStyle)}>{txt(item?.label)}</div>
+            )}
             {item?.isDivider && (
               <>
                 <div style={{"width":"20px","height":"1px","background":"var(--track)","margin":"7px 0"}} />
@@ -90,69 +97,33 @@ export default function AppShell({ v }: Props) {
         <div style={{"flex":"1","minHeight":"10px"}} />
         {v.railOpen && (
           <>
-            <div style={{"margin":"6px 4px 4px","padding":"18px 18px 16px","background":"var(--surface)","border":"1px solid var(--border)","borderRadius":"18px"}}>
-              <div style={{"fontSize":"11px","fontWeight":"600","letterSpacing":".12em","color":"var(--faint)"}}>
-                {"SIGNED IN"}
-              </div>
-              <div style={{"display":"flex","alignItems":"center","gap":"11px","marginTop":"12px"}}>
-                <div style={{"width":"40px","height":"40px","flex":"none","borderRadius":"999px","background":"var(--accent-soft)","color":"var(--accent)","display":"flex","alignItems":"center","justifyContent":"center","fontSize":"13px","fontWeight":"600"}}>
-                  {"MK"}
+            <div style={{"margin":"8px 2px 2px","padding":"12px 12px 12px","background":"var(--surface)","border":"1px solid var(--border)","borderRadius":"16px"}}>
+              <div style={{"display":"flex","alignItems":"center","gap":"10px"}}>
+                <div style={{"width":"34px","height":"34px","flex":"none","borderRadius":"999px","background":"var(--accent-soft)","color":"var(--accent)","display":"flex","alignItems":"center","justifyContent":"center","fontSize":"12px","fontWeight":"600"}}>
+                  {"GH"}
                 </div>
-                <div style={{"minWidth":"0"}}>
-                  <div style={{"fontSize":"17px","fontWeight":"600","letterSpacing":"-.3px","color":"var(--ink)","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"}}>
-                    {"Martin Kilbride"}
+                <div style={{"minWidth":"0","flex":"1"}}>
+                  <div style={{"fontSize":"14px","fontWeight":"600","letterSpacing":"-.2px","color":"var(--ink)","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"}}>
+                    {"Graham Hogan"}
                   </div>
-                  <div style={{"fontSize":"12.5px","color":"var(--faint)","marginTop":"2px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"}}>
-                    {"Kilbride Group · Owner"}
+                  <div style={{"fontSize":"11.5px","color":"var(--faint)","marginTop":"1px","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"}}>
+                    {"Managing Director"}
                   </div>
                 </div>
               </div>
-              <button className="ix4" onClick={v.goSettings} onPointerEnter={v.setBtnIn} onPointerLeave={v.setBtnOut} style={{"position":"relative","width":"100%","height":"46px","marginTop":"16px","display":"flex","alignItems":"center","gap":"10px","padding":"0 5px 0 16px","background":"var(--surface-2)","border":"1px solid var(--border)","borderRadius":"999px","color":"var(--ink)","fontSize":"14px","fontWeight":"600","letterSpacing":"-.1px","cursor":"pointer","overflow":"hidden","isolation":"isolate","boxShadow":"0 1px 0 rgba(255,255,255,.05) inset,0 2px 8px rgba(0,0,0,.18)","transition":"border-color .4s var(--ease)"}}>
-                <span style={css(v.setDotStyle)} />
-                <span style={css(v.setSheen)} />
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" style={css(v.setIconStyle)}>
-                  <path d="M5.5 4v16 M12 4v16 M18.5 4v16" opacity=".45" />
-                  <path d="M3 12.5h5" style={css(v.setKnobA)} />
-                  <path d="M9.5 5.5h5" style={css(v.setKnobB)} />
-                  <path d="M16 14h5" style={css(v.setKnobC)} />
-                </svg>
-                <span style={{"position":"relative","zIndex":"2","flex":"1","textAlign":"left"}}>
-                  {"Settings"}
-                </span>
-                <span style={{"position":"relative","zIndex":"2","flex":"none","width":"36px","height":"36px","borderRadius":"999px","overflow":"hidden","color":"var(--accent)"}}>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={css(v.setArrowA)}>
-                    <path d="M5 12h14 M13 6l6 6-6 6" />
-                  </svg>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={css(v.setArrowB)}>
-                    <path d="M5 12h14 M13 6l6 6-6 6" />
-                  </svg>
-                </span>
-              </button>
+              <div title="Every figure in this environment is fictional demonstration data." style={{"marginTop":"10px","display":"flex","alignItems":"center","gap":"7px","padding":"6px 9px","borderRadius":"10px","border":"1px dashed var(--border-strong)","fontFamily":"var(--mono)","fontSize":"8.5px","letterSpacing":".12em","color":"var(--faint)","whiteSpace":"nowrap"}}>
+                <span style={{"width":"5px","height":"5px","borderRadius":"2px","background":"var(--warn)"}} />
+                {"DEMO ENVIRONMENT · FICTIONAL DATA"}
+              </div>
             </div>
           </>
         )}
         {v.railShut && (
           <>
-            <button className="ix5" onClick={v.goSettings} onPointerEnter={v.enterSettings} onPointerLeave={v.leaveSettings} style={css(v.settingsStyle)}>
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={css(v.settingsGlyphStyle)}>
-                <path d="M5.5 20v-5.5 M5.5 9.5V4 M12 20v-7.5 M12 7.5V4 M18.5 20v-4 M18.5 11V4 M3 12.5h5 M9.5 5.5h5 M16 14h5" />
-              </svg>
-              <span style={css(v.settingsInlineStyle)}>
-                {"Settings"}
-              </span>
-            </button>
             <div style={css(cat(v.railRowStyle, "margin-top:10px;padding:12px 10px;border-top:1px solid var(--border)"))}>
-              <div style={{"width":"40px","height":"40px","flex":"none","borderRadius":"12px","background":"var(--surface-2)","border":"1px solid var(--border)","color":"var(--body)","display":"flex","alignItems":"center","justifyContent":"center","fontSize":"12px","fontWeight":"600","cursor":"pointer"}}>
-                {"MK"}
+              <div title="Graham Hogan · Managing Director" style={{"width":"36px","height":"36px","flex":"none","borderRadius":"12px","background":"var(--surface-2)","border":"1px solid var(--border)","color":"var(--body)","display":"flex","alignItems":"center","justifyContent":"center","fontSize":"12px","fontWeight":"600"}}>
+                {"GH"}
               </div>
-              <span style={css(v.brandStyle)}>
-                <span style={{"display":"block","fontSize":"14px","fontWeight":"500","color":"var(--ink)"}}>
-                  {"Martin Kilbride"}
-                </span>
-                <span style={{"display":"block","marginTop":"2px","fontSize":"12px","color":"var(--faint)"}}>
-                  {"Kilbride Group · Owner"}
-                </span>
-              </span>
             </div>
           </>
         )}
@@ -165,7 +136,8 @@ export default function AppShell({ v }: Props) {
           {txt(v.hoverLabel?.hint)}
         </span>
       </span>
-      <main style={css(cat("--page-dy:", v.pageDy, ";position:relative;z-index:1;flex:1;min-width:0;display:flex;flex-direction:column;margin:16px 16px 16px 0;background:var(--panel,#0f1316);border:1px solid var(--border);border-radius:28px;overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.03) inset"))}>
+      {v.mobileNavOpen && <div onClick={v.closeMobileNav} style={{"position":"fixed","inset":"0","zIndex":"90","background":"var(--scrim)","backdropFilter":"blur(3px)"}} />}
+      <main style={css(v.mainStyle)}>
         {"\n"}
         {txt(v.pageSweepEl)}
         {"\n"}
@@ -176,7 +148,12 @@ export default function AppShell({ v }: Props) {
         )}
         <div style={{"position":"absolute","left":"0","right":"0","bottom":"0","height":"64px","zIndex":"3","pointerEvents":"none","maskImage":"linear-gradient(0deg,#000 0%,transparent 100%)","WebkitMaskImage":"linear-gradient(0deg,#000 0%,transparent 100%)","background":"linear-gradient(0deg,var(--bg) 0%,rgba(0,0,0,0) 100%)","opacity":".85"}} />
         <div style={css(v.headerFieldStyle)} />
-        <header style={{"position":"relative","zIndex":"4","flex":"none","width":"100%","padding":"18px 28px","boxSizing":"border-box","borderBottom":"1px solid var(--border)"}}>
+        <header style={css(v.shellHeaderStyle)}>
+          {v.isMobile && (
+            <button onClick={v.toggleMobileNav} title="Menu" className="ix2" style={{"flex":"none","width":"44px","height":"44px","border":"1px solid var(--border)","borderRadius":"999px","background":"var(--surface)","color":"var(--ink)","display":"flex","alignItems":"center","justifyContent":"center","cursor":"pointer"}}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"><path d="M4 7h16 M4 12h16 M4 17h16" /></svg>
+            </button>
+          )}
           <div style={css(v.headerPillStyle)}>
             {v.isAgents && (
               <>
@@ -242,6 +219,7 @@ export default function AppShell({ v }: Props) {
                 </div>
               </>
             )}
+            {!v.isMobile && (
             <div style={css(cat("flex:", v.searchWrapFlex, ";min-width:42px;display:flex;align-items:center;justify-content:center;padding:0 6px"))}>
               <button className="ix7" onClick={v.openPalette} title={v.searchHint} style={css(v.searchBarStyle)}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" style={{"flex":"none"}}>
@@ -259,6 +237,7 @@ export default function AppShell({ v }: Props) {
                 )}
               </button>
             </div>
+            )}
             {v.showHint && (
               <>
                 <span style={{"flex":"0 1 auto","minWidth":"0","padding":"0 12px","fontFamily":"var(--mono)","fontSize":"9.5px","letterSpacing":"0.11em","color":"var(--faint)","whiteSpace":"nowrap","overflow":"hidden","textOverflow":"ellipsis"}}>
@@ -266,7 +245,7 @@ export default function AppShell({ v }: Props) {
                 </span>
               </>
             )}
-            {v.barOpen && (
+            {v.barOpen && !v.isMobile && (
               <>
                 <div style={{"width":"1px","height":"18px","flex":"none","margin":"0 4px","background":"var(--border)"}} />
                 <div style={{"flex":"0 0 auto","display":"flex","alignItems":"center","gap":"2px","padding":"0 3px"}}>
@@ -311,10 +290,10 @@ export default function AppShell({ v }: Props) {
                         <>
                           <div style={{"minWidth":"0"}}>
                             <div style={{"fontSize":"12px","fontWeight":"500","lineHeight":"1.2","whiteSpace":"nowrap"}}>
-                              {"Martin Kilbride"}
+                              {"Graham Hogan"}
                             </div>
                             <div style={{"fontSize":"10.5px","color":"var(--faint)","lineHeight":"1.2"}}>
-                              {"Owner"}
+                              {"Managing Director"}
                             </div>
                           </div>
                         </>
@@ -324,11 +303,13 @@ export default function AppShell({ v }: Props) {
                 )}
               </>
             )}
+{!v.isMobile && (
             <button className="ix2" onClick={v.toggleBar} title={v.barLabel} style={{"flex":"none","width":"42px","height":"42px","border":"0","borderRadius":"999px","background":"none","color":"var(--faint)","cursor":"pointer","display":"flex","alignItems":"center","justifyContent":"center","transition":"background .2s var(--ease),color .2s var(--ease)"}}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={css(v.barChevronStyle)}>
                 <path d="m9 6 6 6-6 6" />
               </svg>
             </button>
+            )}
           </div>
         </header>
         {v.showNotifs && (
@@ -389,7 +370,9 @@ export default function AppShell({ v }: Props) {
         {v.isDashboard && <DashboardKpiBand v={v} />}
         <div data-scroll-main="1" style={{"flex":"1","minHeight":"0","overflowY":"auto","overflowX":"hidden","scrollbarWidth":"none"}}>
           {v.isChat && <Home v={v} />}
-          {v.isWork && <Work v={v} />}
+          {v.isWork && (v.hhWorkTab === "schedule" || v.hhWorkTab === "workflows") && <Work v={v} />}
+          {v.isWork && v.hhWorkTab !== "schedule" && v.hhWorkTab !== "workflows" && <HHWork tab={v.hhWorkTab} />}
+          {v.hhModule && <HoganPage page={v.hhPage} />}
           {v.isRecords && <Records v={v} />}
           {v.rec?.isContacts && (
             <>
@@ -452,7 +435,7 @@ export default function AppShell({ v }: Props) {
                           {"No contacts match"}
                         </div>
                         <div style={{"fontSize":"13px","color":"var(--dim)","marginTop":"6px"}}>
-                          {"Try fewer words — it matches on name, role, organisation and tag."}
+                          {"Try fewer words. It matches on name, role, organisation and tag."}
                         </div>
                       </div>
                     </>
@@ -471,6 +454,7 @@ export default function AppShell({ v }: Props) {
           )}
           {v.rec?.isFiles && <RecordsFiles v={v} />}
           {v.rec?.isOntology && <RecordsOntology v={v} />}
+          {v.rec?.isExplorer && <RecordsExplorer />}
           {v.isActivity && <Activity v={v} />}
           {v.act?.detailOpen && (
             <>
@@ -576,7 +560,7 @@ export default function AppShell({ v }: Props) {
             </>
           )}
           {v.isSettings && <Settings v={v} />}
-          {v.isDashboard && <Dashboard v={v} />}
+          {v.isDashboard && <HHDashboard tab={v.hhDashTab} />}
           {v.isAgents && <Agents v={v} />}
         </div>
       </main>
@@ -771,7 +755,7 @@ export default function AppShell({ v }: Props) {
                 <>
                   <div style={{"padding":"8px 24px 4px","animation":"expandIn .3s var(--ease) both"}}>
                     <div style={{"fontFamily":"var(--mono)","fontSize":"9.5px","letterSpacing":"0.13em","color":"var(--faint)","marginTop":"10px"}}>
-                      {"PULSE BUILT THIS — EDIT ANYTHING"}
+                      {"PULSE BUILT THIS · EDIT ANYTHING"}
                     </div>
                     <div style={{"marginTop":"14px"}}>
                       {arr(v.builder?.blocks).map((b: any, i145: number) => (
@@ -820,6 +804,8 @@ export default function AppShell({ v }: Props) {
       {v.newRec?.open && <NewRecordDialog v={v} />}
       {v.paletteOpen && <CommandPalette v={v} />}
       {v.bgGallery?.open && <BackgroundGallery v={v} />}
+      <RecordDrawerHost />
+      <ToastHost />
     </div>
     </>
   );

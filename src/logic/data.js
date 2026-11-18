@@ -1,4 +1,4 @@
-/* Demo data and pure helpers for the Pulse prototype (Kilbride Group). */
+/* Pulse template data, re-skinned for Hogan Healthcare OS (fictional demo content). */
 
 const INK="var(--ink)", BODY="var(--body)", DIM="var(--dim)", FAINT="var(--faint)";
 const LIME="var(--accent)", GREEN="var(--ok)", AMBER="var(--warn)", RED="var(--bad)", NEUTRAL="var(--neutral)";
@@ -32,88 +32,113 @@ const ICONS = {
   records:"M6.4 3.6h7.4l4.2 4.2v12.6H6.4V3.6Z M13.4 3.8v4.2h4.2 M9 12.4h6 M9 16h4",
   tree:"M4.5 6h5 M4.5 12h5 M4.5 18h5 M12.5 6h7 M12.5 12h7 M12.5 18h7",
   graph:"M7 7.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8Z M17.6 10.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8Z M9.4 21.4a2.4 2.4 0 1 0 0-4.8 2.4 2.4 0 0 0 0 4.8Z M8.6 6.4l7.6 2.6 M15.8 11.4l-5.6 5.2",
-  bell:"M6 8.5a6 6 0 0 1 12 0c0 6.5 2.6 8.5 2.6 8.5H3.4S6 15 6 8.5Z M10.3 20.5a1.94 1.94 0 0 0 3.4 0"
+  bell:"M6 8.5a6 6 0 0 1 12 0c0 6.5 2.6 8.5 2.6 8.5H3.4S6 15 6 8.5Z M10.3 20.5a1.94 1.94 0 0 0 3.4 0",
+  navSales:"M3.5 17.5l5.5-5.5 4 4 7.5-7.5 M15 8.5h5.5V14",
+  navOrders:"M9 4.5h6a1 1 0 0 1 1 1V7H8V5.5a1 1 0 0 1 1-1Z M8 6H6.5A1.5 1.5 0 0 0 5 7.5v11A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 17.5 6H16 M8.5 13.2l2.2 2.2 4.8-4.8",
+  navInventory:"M12 3.2 4.2 7.1v9.8L12 20.8l7.8-3.9V7.1L12 3.2Z M4.2 7.1 12 11l7.8-3.9 M12 11v9.8 M8.1 5.15l7.8 3.9",
+  navPurchasing:"M3 6.5h11v9H3z M14 9.5h3.6l3.4 3.4v2.6h-7 M7 18.5a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2Z M17.5 18.5a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2Z",
+  navFinance:"M17.5 6.6A6.6 6.6 0 0 0 7 12a6.6 6.6 0 0 0 10.5 5.4 M4.5 10.2h8 M4.5 13.8h8",
+  navCompliance:"M12 3.6 19.5 6v6.1c0 4-3.1 6.9-7.5 8.3-4.4-1.4-7.5-4.3-7.5-8.3V6L12 3.6Z M9.2 12.2l2 2 3.6-3.7",
+  navRentals:"M12 3v18 M4.2 7.5l15.6 9 M4.2 16.5l15.6-9 M9.5 4.5 12 7l2.5-2.5 M9.5 19.5 12 17l2.5 2.5",
+  navSettings:"M5.5 20v-5.5 M5.5 9.5V4 M12 20v-7.5 M12 7.5V4 M18.5 20v-4 M18.5 11V4 M3 12.5h5 M9.5 5.5h5 M16 14h5"
 };
 
 /* Ontology stays first and is never removed (PulseLogic enforces this too). */
 const REC_SECTIONS = [
   {id:"ontology", label:"Ontology", blurb:"How every record connects: entities, predicates and the paths between them."},
-  {id:"files", label:"Files", blurb:"Documents, contracts and certificates — indexed where Helios can read them."},
-  {id:"contacts", label:"Contacts", blurb:"Every person the business deals with, staff and external."}
+  {id:"files", label:"Files", blurb:"Agreements, certificates and quality documents, indexed where Pulse can read them."},
+  {id:"contacts", label:"Contacts", blurb:"Every person the business deals with: staff, hospital contacts and suppliers."},
+  {id:"explorer", label:"Explorer", blurb:"Follow any record to everything it touches: hospital, stock, product, lot, transfer, order."}
 ];
 
 const CONTACTS = [
-  ["Aoife Nolan","Accounts manager","aoife@kilbridegroup.ie","Kilbride Group","staff","var(--accent)"],
-  ["Séamus Byrne","Senior installer","seamus@kilbridegroup.ie","Kilbride Group","staff","#9fd6f0"],
-  ["Tom Walsh","Operations lead","tom@kilbridegroup.ie","Kilbride Group","staff","#e6c78a"],
-  ["Niamh Cronin","Trade counter","niamh@kilbridegroup.ie","Kilbride Group","staff","#c8b4f0"],
-  ["Dermot Casey","Buyer","dermot@caseybuilders.ie","Casey Builders","customer","#9fd6f0"],
-  ["Liam Dunne","Owner","liam@dunneandsons.ie","Dunne & Sons Ltd","on stop","#e2a08c"],
-  ["Máire Fitzgerald","Director","maire@fitzheating.ie","Fitzgerald Heating","watch","#e6c78a"],
-  ["Paul Ó Riain","Site foreman","paul@oriain.ie","Ó Riain, Glanmire","customer","#a8e0c0"],
-  ["Cathal Moore","Account manager","cathal@munsterplumbing.ie","Munster Plumbing","supplier","#c8b4f0"]
+  ["Graham Hogan","Managing Director","Demo placeholder","Hogan Healthcare","staff","#4A9DA5"],
+  ["John Culkin","Operations Director","Demo placeholder","Hogan Healthcare","staff","#9FC3D9"],
+  ["Aileen Cahalane","Sales Director","Demo placeholder","Hogan Healthcare","staff","#8FC7A4"],
+  ["Margaret Duff","Office Manager","Demo placeholder","Hogan Healthcare","staff","#D9C27A"],
+  ["Sharon O'Mongain","Sales Administration","Demo placeholder","Hogan Healthcare","staff","#E0A98C"],
+  ["Rory Whelan","Field Sales Representative","Demo placeholder","Hogan Healthcare","fictional","#B9A9D9"],
+  ["Clodagh Byrne","Field Sales Representative","Demo placeholder","Hogan Healthcare","fictional","#E6B7C8"],
+  ["Eoin Tierney","Field Sales Representative","Demo placeholder","Hogan Healthcare","fictional","#A9CFE8"],
+  ["Orla Keane","Theatre manager","Via clinic office (demo)","Harbour Orthopaedic Clinic","customer","#7FB8C9"],
+  ["Mr D. Furlong","Consultant orthopaedic surgeon","Via clinic office (demo)","Harbour Orthopaedic Clinic","customer","#7FB8C9"],
+  ["Ciara Doyle","Materials manager","Via clinic office (demo)","South Dublin Surgical Centre","customer","#7FB8C9"],
+  ["Niall Kearney","Clinical nurse manager","Via clinic office (demo)","Liffey Surgical Clinic","customer","#7FB8C9"],
+  ["Sinéad Moran","Practice manager","Via clinic office (demo)","Eastgate Orthopaedics","customer","#7FB8C9"],
+  ["Pádraig Lynch","Theatre stores","Via clinic office (demo)","Atlantic Sports Surgery","customer","#7FB8C9"],
+  ["Mr K. Ruane","Consultant orthopaedic surgeon","Via clinic office (demo)","Pinewood Orthopaedics","prospect","#E0A98C"],
+  ["Deirdre Coyle","Head of procurement","Via hospital office (demo)","Cedarview Private Hospital","customer","#7FB8C9"],
+  ["Customer service desk","Order desk","Supplier portal (demo)","Aquila Sports Medicine","supplier","#D9C27A"],
+  ["Account manager","Key account","Supplier portal (demo)","Halcyon Orthopaedics","supplier","#D9C27A"],
+  ["Regional manager","Distribution","Supplier portal (demo)","CONMED","supplier","#D9C27A"]
 ];
 
 const FILE_TREE = [
-  {type:"folder", id:"f-org", name:"Organisations", depth:0},
-  {type:"file", id:"fl-1", name:"Casey Builders — framework 2026.pdf", depth:1, parent:"f-org", indexed:true,
-   path:"Organisations / Casey Builders", title:"Casey Builders — framework 2026",
-   facts:[["TYPE","PDF · 6 pages"],["ADDED","12 Jan 2026"],["INDEXED","All 6 pages"],["OWNER","Aoife Nolan"]],
-   body:["The framework sets the discount tiers for 2026 and the payment terms Casey Builders trade on. Tier two applies from €40k of annual spend, which they passed in August.",
-     "Pricing is fixed to the June supplier agreement, so a change on the Munster side flows through here rather than being renegotiated separately.",
-     "Termination requires sixty days' notice on either side. Nothing in the document blocks putting the account on stop for non-payment."],
-   links:[["Casey Builders","org"],["Dermot Casey","person"],["PO-4471","order"]]},
-  {type:"file", id:"fl-2", name:"Dunne & Sons — credit application.pdf", depth:1, parent:"f-org", indexed:true,
-   path:"Organisations / Dunne & Sons Ltd", title:"Dunne & Sons — credit application",
-   facts:[["TYPE","PDF · 4 pages"],["ADDED","3 Mar 2011"],["INDEXED","All 4 pages"],["OWNER","Aoife Nolan"]],
-   body:["The original 2011 application, signed by Liam Dunne, setting a €20,000 limit against thirty-day terms.",
-     "Days-to-pay ran at twelve for most of that period and moved to seventy-four after May 2026, which is what put the account on stop.",
-     "The personal guarantee in section four is still in force and has never been called on."],
-   links:[["Dunne & Sons Ltd","org"],["Liam Dunne","person"],["INV-10428","invoice"]]},
-  {type:"folder", id:"f-cert", name:"Certificates", depth:0},
-  {type:"file", id:"fl-3", name:"Séamus Byrne — gas safe 2026.pdf", depth:1, parent:"f-cert", indexed:true,
-   path:"Certificates / Installers", title:"Séamus Byrne — gas safe 2026",
-   facts:[["TYPE","PDF · 2 pages"],["EXPIRES","14 Nov 2026"],["INDEXED","Both pages"],["OWNER","Operations"]],
-   body:["Registration covers domestic boilers and commercial water heaters, valid to 14 November 2026.",
-     "The renewal reminder fires sixty days before expiry. That routine failed twice this week because Mallow yard has no contact on file."],
-   links:[["Séamus Byrne","person"],["Certificate renewal reminder","workflow"]]},
-  {type:"file", id:"fl-4", name:"Public liability — 2026.pdf", depth:1, parent:"f-cert", indexed:false,
-   path:"Certificates / Insurance", title:"Public liability — 2026",
-   facts:[["TYPE","PDF · 12 pages"],["EXPIRES","1 Apr 2027"],["INDEXED","Not indexed"],["OWNER","Operations"]],
-   body:["Cover to €6.5m across all three locations. Not indexed, so Helios cannot answer questions from it yet.",
-     "Indexing it would let the site-visits module check cover before a job is booked at a new address."],
-   links:[["Head office","location"],["Ballincollig depot","location"]]},
+  {type:"folder", id:"f-agr", name:"Agreements", depth:0},
+  {type:"file", id:"fl-1", name:"Harbour Orthopaedic Clinic: consignment agreement CA-2023-04.pdf", depth:1, parent:"f-agr", indexed:true,
+   path:"Agreements / Consignment", title:"Consignment agreement CA-2023-04 (demo)",
+   facts:[["TYPE","PDF · 8 pages"],["SIGNED","14 Apr 2023"],["INDEXED","All 8 pages"],["OWNER","Graham Hogan"]],
+   body:["Stock held at Harbour Orthopaedic Clinic stays Hogan Healthcare's property until it is used. The clinic reports usage, Hogan raises a usage order and invoices it.",
+     "Par levels are agreed per product and reviewed quarterly. HH-OR-204 is set at 6 units. Hogan tops the site up when it falls below par.",
+     "Either side may request a full stock count on reasonable notice. Variances are investigated jointly before any adjustment. (Fictional demo document.)"],
+   links:[["Harbour Orthopaedic Clinic","location"],["HH-OR-204","product"],["INV-6128","invoice"]]},
+  {type:"file", id:"fl-2", name:"Distribution agreement summary: key partners.pdf", depth:1, parent:"f-agr", indexed:true,
+   path:"Agreements / Suppliers", title:"Distribution agreements summary (demo)",
+   facts:[["TYPE","PDF · 5 pages"],["UPDATED","2 Feb 2026"],["INDEXED","All 5 pages"],["OWNER","Graham Hogan"]],
+   body:["A one-page summary per key global partner: territory, product scope, payment terms and stock obligations. Terms shown in this demo are illustrative.",
+     "Every agreement requires the distributor to keep traceability records by lot and serial, and to support field safety actions and recalls when the manufacturer asks."],
+   links:[["Halcyon Orthopaedics","supplier"],["Veritas Surgical","supplier"]]},
+  {type:"folder", id:"f-qa", name:"Quality", depth:0},
+  {type:"file", id:"fl-3", name:"SOP-QA-11 Traceability and recall drill.pdf", depth:1, parent:"f-qa", indexed:true,
+   path:"Quality / SOPs", title:"SOP-QA-11 Traceability and recall drill",
+   facts:[["TYPE","PDF · 6 pages"],["VERSION","v3"],["REVIEW DUE","2 Nov 2026"],["OWNER","John Culkin"]],
+   body:["How to find every unit of a lot or serial within an hour: where it was received, which hospitals hold it, which were used and which organisations to contact.",
+     "A drill is run twice a year on a real lot, marked as an exercise. The review of this SOP is overdue; the Quality & Compliance Agent has flagged it."],
+   links:[["HH-OR-204","product"],["Simulated traceability drill","drill"]]},
+  {type:"file", id:"fl-4", name:"CE certificate: Polaris power consumables.pdf", depth:1, parent:"f-qa", indexed:false,
+   path:"Quality / Certificates", title:"CE certificate: Polaris power consumables (demo ref.)",
+   facts:[["TYPE","PDF · 2 pages"],["EXPIRES","8 Jan 2027"],["INDEXED","Not indexed"],["OWNER","John Culkin"]],
+   body:["Supplier copy of the notified body certificate for saw blades and burrs. Not indexed, so Pulse cannot answer questions from it yet.",
+     "A renewed certificate has been requested. Indexing it would let the register check certificate dates automatically."],
+   links:[["Polaris Surgical Power","supplier"],["QX-036","exception"]]},
   {type:"folder", id:"f-fin", name:"Finance", depth:0},
-  {type:"file", id:"fl-5", name:"INV-10428.pdf", depth:1, parent:"f-fin", indexed:true,
-   path:"Finance / Invoices", title:"INV-10428",
-   facts:[["TYPE","PDF · 1 page"],["VALUE","€28,410"],["AGE","74 days"],["OWNER","Aoife Nolan"]],
-   body:["The oldest unpaid invoice on the ledger and the reason Dunne & Sons is on stop.",
-     "Two reminders have gone out. The third is drafted and waiting on the finance manager inside the chase workflow."],
-   links:[["Dunne & Sons Ltd","org"],["Chase unpaid invoices","workflow"]]},
-  {type:"file", id:"fl-6", name:"Month-end close — August.xlsx", depth:1, parent:"f-fin", indexed:false,
-   path:"Finance / Close", title:"Month-end close — August",
-   facts:[["TYPE","XLSX · 9 sheets"],["ADDED","1 Sep 2026"],["INDEXED","Not indexed"],["OWNER","Aoife Nolan"]],
-   body:["The working file behind the August close. Cash collected came in at €368k against €358k in July.",
-     "Spreadsheets are stored but not indexed by default — the numbers Helios quotes come from the ledger, not from here."],
-   links:[["Finance","area"],["Month-end close","workflow"]]}
+  {type:"file", id:"fl-5", name:"BILL-2034 Aquila Sports Medicine.pdf", depth:1, parent:"f-fin", indexed:true,
+   path:"Finance / Supplier bills", title:"BILL-2034 (demo)",
+   facts:[["TYPE","PDF · 1 page"],["VALUE","€4,280"],["DATED","14 Nov 2026"],["OWNER","Margaret Duff"]],
+   body:["Bills 14 knotless suture anchors (HH-SM-140) at €290 plus €220 freight against PO-337.",
+     "PO-337 ordered 12 and GRN-0419 received 12, so the invoice is on hold pending a credit note for the two units not delivered."],
+   links:[["PO-337","po"],["GRN-0419","grn"],["Aquila Sports Medicine","supplier"]]},
+  {type:"file", id:"fl-6", name:"Month-end pack: October.xlsx", depth:1, parent:"f-fin", indexed:false,
+   path:"Finance / Close", title:"Month-end pack: October (demo)",
+   facts:[["TYPE","XLSX · 7 sheets"],["ADDED","4 Nov 2026"],["INDEXED","Not indexed"],["OWNER","Margaret Duff"]],
+   body:["The working file behind the October close. Spreadsheets are stored but not indexed by default.",
+     "In production, the numbers Pulse quotes would come from the accounting integration, which is not yet verified for this demo."],
+   links:[["Finance","area"]]},
+  {type:"folder", id:"f-rent", name:"NICE1 rentals", depth:0},
+  {type:"file", id:"fl-7", name:"NICE1 rental terms and published pricing.pdf", depth:1, parent:"f-rent", indexed:true,
+   path:"NICE1 rentals", title:"NICE1 rental terms (reference)",
+   facts:[["TYPE","PDF · 3 pages"],["UPDATED","Sep 2026"],["INDEXED","All 3 pages"],["OWNER","John Culkin"]],
+   body:["Published pricing used as a reference in this demo: system only for the first two weeks €300, system with therapy wrap €400, each extra week €100.",
+     "Customers are recorded by reference number only. No clinical or patient details are held in Pulse."],
+   links:[["RN-0208","booking"],["N1-018","rental"]]}
 ];
 
 const ONTO_NODES = [
-  ["Organisation","entity",500,300,1,"Customers and suppliers. Balances arrive from the ledger through the record spine."],
-  ["Person","entity",300,190,1,"One entity for staff and external contacts, scoped by role rather than split in two."],
-  ["Location","entity",700,190,1,"Multi-branch as a business concept: locations plus the location permission scope."],
-  ["Team","entity",250,430,1,"Teams are records, so the team scope on a grant resolves against them."],
-  ["Task","entity",690,430,1,"Work, whatever it is attached to. Queues are one permission-filtered query."],
-  ["Approval","entity",850,320,0,"A request and its steps. Each decision is written as the person who made it."],
-  ["Invoice","ledger",390,95,0,"Read through the spine — the wholesale ledger stays the source of truth."],
-  ["Order","ledger",620,95,0,"Purchase and sales orders, linked to the organisation that raised them."],
-  ["Visit","module",860,470,0,"Contributed by site-visits, with its own table, predicate and tools."],
-  ["File","entity",140,300,0,"Documents against any record. Indexed pages are what Helios can read."],
-  ["works at","predicate",395,240,0,"Person → Organisation."],
-  ["located at","predicate",605,240,0,"Organisation → Location."],
-  ["member of","predicate",360,370,0,"Person → Team."],
-  ["relates to","predicate",600,370,0,"Task → anything."],
-  ["attached to","predicate",140,372,0,"File → anything."]
+  ["Product","entity",500,300,1,"Every device the business distributes: SKU, GTIN / UDI-DI, supplier, class and documents."],
+  ["Hospital / account","entity",300,190,1,"Hospitals, clinics and practices, with their contacts, consignment site and ledger balance."],
+  ["Location","entity",700,190,1,"The main stockroom and the eight hospital consignment sites. Stock is held per location."],
+  ["Lot / serial","entity",250,430,1,"UDI-PI: lot, batch, serial and expiry. The unit of traceability."],
+  ["Stock movement","entity",690,430,1,"Receipts, transfers, use, dispatch and returns. Each one links to its order and money."],
+  ["Approval","entity",850,320,0,"Transfers, purchase orders, credit notes and bill holds. Always decided by a named person."],
+  ["Invoice","ledger",390,95,0,"Customer invoices and supplier bills, read from accounting (integration not yet verified)."],
+  ["Order","ledger",620,95,0,"Sales orders and purchase orders, linked to the account or supplier that raised them."],
+  ["Rental","module",860,470,0,"NICE1 devices and bookings, contributed by the rentals module."],
+  ["Document","entity",140,300,0,"CE certificates, declarations of conformity, IFUs and SOPs against any record."],
+  ["held at","predicate",395,240,0,"Lot / serial → Location."],
+  ["supplied by","predicate",605,240,0,"Product → Supplier."],
+  ["moved by","predicate",360,370,0,"Lot / serial → Stock movement."],
+  ["fulfils","predicate",600,370,0,"Stock movement → Order."],
+  ["evidenced by","predicate",140,372,0,"Document → Product."]
 ];
 
 const ONTO_EDGES = [
@@ -124,7 +149,7 @@ const ONTO_EDGES = [
 ];
 
 const REC_TEMPLATES = [
-  ["Field sheet","Records","Labelled fields in a grid — the default for a person, organisation or location.",
+  ["Field sheet","Records","Labelled fields in a grid: the default for a person, organisation or location.",
    "M5 5.5h14v13H5v-13Z M5 10h14 M12 10v8.5","grid"],
   ["Contact card","Records","A portrait, key fields and every linked record in one compact panel.",
    "M12 11.5a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8Z M5.5 19c.8-3 3.3-4.7 6.5-4.7s5.7 1.7 6.5 4.7","card"],
@@ -138,11 +163,11 @@ const REC_TEMPLATES = [
    "M5 6.5h2l1.4 1.4L11 5.5 M5 12.5h2l1.4 1.4 2.6-2.4 M5 18.5h2l1.4 1.4 2.6-2.4 M15 6.5h4 M15 12.5h4 M15 18.5h4","checklist"],
   ["Ledger","Finance","Rows and running totals. For anything with amounts and dates.",
    "M4 6h16 M4 12h16 M4 18h16 M9 3.5v17","ledger"],
-  ["Invoice","Finance","Line items, totals and a status — built to be sent, not just stored.",
+  ["Invoice","Finance","Line items, totals and a status, built to be sent, not just stored.",
    "M7 3.5h10v17H7v-17Z M9.5 8h5 M9.5 11.5h5 M9.5 15h3","invoice"],
   ["Document","Notes","Long-form text with linked records pulled out down the side.",
    "M7 3.5h7l5 5v12H7v-17Z M14 3.7v5h5 M10 13h6 M10 16.5h4","document"],
-  ["Gallery","Notes","A wall of images and files with a caption on each — for a site or a job.",
+  ["Gallery","Notes","A wall of images and files with a caption on each, for a site or a job.",
    "M4.5 6h6v6h-6V6Z M13.5 6h6v6h-6V6Z M4.5 14h6v4h-6v-4Z M13.5 14h6v4h-6v-4Z","gallery"],
   ["Map & locations","Ops","A pinboard of places, with the record's fields beside each pin.",
    "M12 21s6.5-5.6 6.5-11a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21Z M12 12.8a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2Z","map"],
@@ -154,12 +179,14 @@ const REC_TEMPLATE_CATS = ["All","Records","Case work","Finance","Notes","Ops"];
 /* ---- admin hub ---- */
 /* ---- admin hub: 13 settings areas in five groups ---- */
 const PEOPLE = [
-  ["Aoife Nolan","Accounts manager","aoife@kilbridegroup.ie","Head office","active","Admin","2 min ago"],
-  ["Séamus Byrne","Senior installer","seamus@kilbridegroup.ie","Ballincollig","active","Standard","1 h ago"],
-  ["Tom Walsh","Operations lead","tom@kilbridegroup.ie","Head office","active","Manager","34 min ago"],
-  ["Niamh Cronin","Trade counter","niamh@kilbridegroup.ie","Ballincollig","active","Standard","3 h ago"],
-  ["Dermot Casey","Buyer · Casey Builders","dermot@caseybuilders.ie","—","external","External","2 days ago"],
-  ["Liam Dunne","Owner · Dunne & Sons","liam@dunneandsons.ie","—","inactive","External","19 days ago"]
+  ["Graham Hogan","Managing Director","Demo placeholder","Dún Laoghaire","active","Admin","Now"],
+  ["John Culkin","Operations Director","Demo placeholder","Dún Laoghaire","active","Manager","12 min ago"],
+  ["Aileen Cahalane","Sales Director","Demo placeholder","Field","active","Manager","9 min ago"],
+  ["Margaret Duff","Office Manager","Demo placeholder","Dún Laoghaire","active","Manager","4 min ago"],
+  ["Sharon O'Mongain","Sales Administration","Demo placeholder","Dún Laoghaire","active","Standard","2 min ago"],
+  ["Rory Whelan (fictional)","Field Sales Representative","Demo placeholder","Field","active","Standard","1 h ago"],
+  ["Clodagh Byrne (fictional)","Field Sales Representative","Demo placeholder","Field","active","Standard","38 min ago"],
+  ["Eoin Tierney (fictional)","Field Sales Representative","Demo placeholder","Field","active","Standard","2 h ago"]
 ];
 const ROLE_LEVELS = ["Admin","Manager","Standard","External"];
 const PERM_KEYS = [["view","View records"],["edit","Edit records"],["approve","Approve payments"]];
@@ -177,27 +204,27 @@ const ROLE_SCOPES = ["All records","Their location","Assigned only"];
 const DEFAULT_PERMS = {Admin:{view:true,edit:true,approve:true}, Manager:{view:true,edit:true,approve:true},
   Standard:{view:true,edit:true,approve:false}, External:{view:true,edit:false,approve:false}};
 const INTEGRATIONS = [
-  {name:"Gmail", blurb:"Mail in and out of Pulse — threads attach to the record they mention, and drafts wait for your yes.", tint:"#ea4335", status:"connected", statusKind:"ok",
-   glyph:"M4 7.2 12 13 20 7.2 M4 7.2v10.6h16V7.2 M4 7.2 8.5 4h7L20 7.2",
-   lastSync:"2 min ago", usage:"340 emails/day", auth:"OAuth 2.0", scopes:["Read","Send"]},
-  {name:"Xero", blurb:"Invoices, payments and credit notes sync both ways, so the ledger and the record spine never drift.", tint:"#13b5ea", status:"disconnected", statusKind:"bad",
+  {name:"Current ERP", blurb:"Probably Enterpryze (to confirm). Pulse would sit above it and read orders, customers, products, stock movements and invoices. Nothing in the ERP is replaced or written to in this demo.", tint:"#9FB5D9", status:"demo · to verify", statusKind:"warn",
+   glyph:"M4.5 7.5c0-1.7 3.4-3 7.5-3s7.5 1.3 7.5 3-3.4 3-7.5 3-7.5-1.3-7.5-3Z M4.5 7.5v9c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-9 M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3",
+   lastSync:"Demo data only", usage:"Potential data: orders, customers, products, stock movements, invoices", auth:"To confirm in discovery", scopes:["Read (planned)"]},
+  {name:"Xero", blurb:"Accounting. Introduced at the request of a financial partner. Would supply AP, AR, bank feeds and financial performance. Current connection status to confirm.", tint:"#13b5ea", status:"to confirm", statusKind:"warn",
    glyph:"M4.5 12a7.5 7.5 0 0 1 12.8-5.3 M19.5 12a7.5 7.5 0 0 1-12.8 5.3 M17.3 4v3.3h-3.3 M6.7 20v-3.3H10",
-   lastSync:"27 Feb — token expired", usage:"148 invoices queued", auth:"OAuth 2.0", scopes:["Read","Write"]},
-  {name:"Sage", blurb:"Nightly read of the chart of accounts and balances, mapped onto Pulse organisations.", tint:"#00d639", status:"read only", statusKind:"warn",
-   glyph:"M4 8 12 4.5 20 8 12 11.5 4 8Z M4 13 12 16.5 20 13 M4 18 12 21.5 20 18",
-   lastSync:"14 min ago", usage:"9 accounts synced nightly", auth:"API key", scopes:["Read"]},
-  {name:"HubSpot", blurb:"Contacts, companies and deals stay matched to Pulse records without a second address book.", tint:"#ff7a59", status:"connected", statusKind:"ok",
-   glyph:"M12 9.6a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8Z M12 4v3.4 M12 16.6V20 M4 12h3.4 M16.6 12H20 M6.5 6.5l2.4 2.4 M15.1 15.1l2.4 2.4 M17.5 6.5l-2.4 2.4 M8.9 15.1l-2.4 2.4",
-   lastSync:"6 min ago", usage:"1.1k contacts synced", auth:"OAuth 2.0", scopes:["Read","Write"]},
-  {name:"WhatsApp Business", blurb:"Send updates and chase messages from the record, logged against it as they go.", tint:"#25d366", status:"write only", statusKind:"warn",
-   glyph:"M4 19.5 5.3 15A7.7 7.7 0 1 1 8.6 18.2L4 19.5Z M8.6 10.3c0 3 2.4 5.4 5.4 5.4",
-   lastSync:"11 min ago", usage:"62 messages/day", auth:"API key", scopes:["Send"]},
-  {name:"Resend", blurb:"Transactional email for everything Pulse generates — reminders, briefings and receipts.", tint:"var(--accent)", status:"write only", statusKind:"warn",
-   glyph:"M3.5 12 20.5 4 16 20l-3.4-6.6L3.5 12Z",
-   lastSync:"38 min ago", usage:"210 emails/day", auth:"API key", scopes:["Send"]},
-  {name:"Composio", blurb:"One connector for the long tail of tools, so a new system does not need a new build.", tint:DIM, status:"not connected", statusKind:"off",
-   glyph:"M9 3v5 M15 3v5 M6 8h12v3.5a6 6 0 0 1-12 0V8Z M12 17.5V21",
-   lastSync:"—", usage:"—", auth:"—", scopes:[]}
+   lastSync:"Not connected in this demo", usage:"Potential data: AP, AR, bank feeds, financial performance", auth:"OAuth 2.0 (planned)", scopes:["Read (planned)"]},
+  {name:"Bank feed", blurb:"The feed today is incomplete. In the demo, bank lines are sample data so reconciliation can be shown. Not yet verified.", tint:"#D9C27A", status:"not verified", statusKind:"warn",
+   glyph:"M4 10h16 M5 10v8 M9.5 10v8 M14.5 10v8 M19 10v8 M3.5 20h17 M12 3.5 3.5 8h17L12 3.5Z",
+   lastSync:"Sample lines, 18 Nov", usage:"Potential data: bank transactions for matching", auth:"Via accounting (to confirm)", scopes:[]},
+  {name:"nice1.ie", blurb:"The existing public NICE1 rental website. Online booking into Pulse is a future concept; enquiries are entered by hand in this demo.", tint:"#B9A9D9", status:"not connected", statusKind:"off",
+   glyph:"M12 3v18 M4.2 7.5l15.6 9 M4.2 16.5l15.6-9",
+   lastSync:"n/a", usage:"Future: booking requests and availability", auth:"n/a", scopes:[]},
+  {name:"Email and calendar", blurb:"Generic placeholder for a future connection so visits and follow-ups land in each person's calendar. Provider unconfirmed.", tint:"#E0A98C", status:"not connected", statusKind:"off",
+   glyph:"M4 7.2 12 13 20 7.2 M4 7.2v10.6h16V7.2 M4 7.2 8.5 4h7L20 7.2",
+   lastSync:"n/a", usage:"Future: meetings, follow-ups, reminders", auth:"n/a", scopes:[]},
+  {name:"Barcode scanners (GS1)", blurb:"Proposed handheld scanning for receiving, picking, transfers and counts. Simulated in this demo with sample GS1 barcodes.", tint:"#8FC7A4", status:"simulated", statusKind:"warn",
+   glyph:"M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8 M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8 M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16 M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16 M7 8v8 M10 8v8 M13 8v8 M16.5 8v8",
+   lastSync:"Demo session", usage:"Lot, serial, expiry and GTIN / UDI-DI capture", auth:"n/a", scopes:["Demo"]},
+  {name:"Previous systems", blurb:"Sage, QuickBooks and Surf were used historically. They are listed for context only; none is connected or needed.", tint:"#7f939d", status:"historical", statusKind:"off",
+   glyph:"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z M12 7.6V12l3 1.8",
+   lastSync:"n/a", usage:"History only", auth:"n/a", scopes:[]}
 ];
 
 /* Background catalogue. Each entry is pure CSS so a tile is the real thing at
@@ -248,6 +275,7 @@ const BG_DEFS = [
 ];
 
 const THEMES = [
+  {id:"hogan", label:"Hogan navy", group:"Dark", bg:"#091218", surface:"#112029", ink:"#eef4f6", accent:"#4A9DA5"},
   {id:"dark", label:"Dark", group:"Dark", bg:"#0b0c0b", surface:"#1a1c19", ink:"#f2f3ef", accent:"#c8f04b"},
   {id:"indigo", label:"Indigo", group:"Dark", bg:"#0a0b13", surface:"#1a1b26", ink:"#f0f1fa", accent:"#8b93ff"},
   {id:"slate", label:"Slate", group:"Dark", bg:"#100e0c", surface:"#211c17", ink:"#f4f0ea", accent:"#e8a14a"},
@@ -257,7 +285,7 @@ const THEMES = [
   {id:"cargo", label:"Cargo", group:"Dark", bg:"#0a0a0a", surface:"#1a1c1a", ink:"#f2f5f2", accent:"#4ade80"},
   {id:"ocean", label:"Ocean", group:"Dark", bg:"#080e12", surface:"#141f25", ink:"#eaf4f8", accent:"#4fd4d0"},
   {id:"graphite", label:"Graphite", group:"Dark", bg:"#111112", surface:"#212124", ink:"#f4f4f5", accent:"#f4f4f5"},
-  {id:"light", label:"Cream", group:"Light", bg:"#f4f2ed", surface:"#ffffff", ink:"#16181c", accent:"#0071e3"},
+  {id:"light", label:"Hogan light", group:"Light", bg:"#eef2f4", surface:"#ffffff", ink:"#10222d", accent:"#267985"},
   {id:"warm", label:"Warm paper", group:"Light", bg:"#faf5ec", surface:"#fffdf9", ink:"#2a2016", accent:"#c9683f"},
   {id:"mist", label:"Mist", group:"Light", bg:"#eef1f4", surface:"#ffffff", ink:"#141e20", accent:"#0e9f6e"},
   {id:"sand", label:"Sand", group:"Light", bg:"#f6f1e6", surface:"#fffdf7", ink:"#221d12", accent:"#7d5fd6"}
@@ -281,123 +309,115 @@ const ADMIN_ICONS = {
 };
 
 const ADMIN_CARDS = [
-  {id:"people", group:"ORGANISATION", title:"People & access", icon:"people", tint:"#6ad0f0",
-   blurb:"Invite, suspend and offboard the people who use Pulse.",
-   tags:["48 people","6 teams","3 locations"], badge:"3 waiting", badgeKind:"warn",
-   footer:"Last login checked 4 minutes ago", action:"Review 3 invites",
+  {id:"people", group:"ORGANISATION", title:"People & access", icon:"people", tint:"#7FB8C9",
+   blurb:"The eight people who use Hogan Healthcare OS, and what each can reach.",
+   tags:["8 core users","5 departments","3 fictional reps"],
+   footer:"Three field reps are fictional for the demo", action:"Review access",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Add, invite or remove employees","",""],["Create teams and departments","6 teams"],["Assign managers","4 reporting lines"],
-     ["Set locations","Head office · Ballincollig · Mallow"],["Suspend accounts","2 suspended"],["View last login","48 people tracked"]]},
+   rows:[["Add, invite or remove users",""],["Departments","Management, Sales, Orders, Operations, Finance & admin"],["Managers","John Culkin, Aileen Cahalane, Margaret Duff"],
+     ["Locations","Dún Laoghaire office and stockroom, field"],["Contact details","demo placeholders only"]]},
   {id:"teams", group:"ORGANISATION", title:"Roles & permissions", icon:"shield", tint:"var(--accent)",
-   blurb:"Permission templates, and exactly what each person can reach.",
-   tags:["4 roles","64 permissions","3 scopes"],
-   heroLabel:"THE QUESTION THIS ANSWERS", heroAction:"Show me what someone can access",
-   heroText:"Pick a person and see every record, action and export they can reach — resolved through their grants, not guessed from the menus.",
+   blurb:"Who can see, change and approve what. Sensitive decisions always need a named person.",
+   tags:["4 roles","approval limits","no agent approvals"],
+   heroLabel:"APPROVAL RULES", heroAction:"Show approval rules",
+   heroText:"Stock transfers need John Culkin. Purchase orders over €5,000, credit notes, discounts and supplier bill holds need Graham Hogan. Agents can propose but never approve.",
    footer:"Preview Pulse as another user", action:"Open preview",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Create permission templates","4 in use"],["View, edit, export and delete access","per permission"],
-     ["Restrict by team, location or record owner","3 scopes"],["Set approval limits","€10,000 threshold"],["Preview Pulse as another user",""]]},
-  {id:"structure", group:"ORGANISATION", title:"Company structure", icon:"structure", tint:"#f0c04b",
-   blurb:"Who reports to whom, where they work and when.",
-   tags:["3 locations","Europe/Dublin","EUR"],
-   listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Company details","Kilbride Group"],["Departments","5"],["Teams","6"],["Locations","3"],
-     ["Reporting lines","4"],["Working hours","08:00–17:30, Mon–Fri"],["Holidays","Irish public holidays"],
-     ["Default currency and timezone","EUR · Europe/Dublin"]]},
+   rows:[["Admin","Graham Hogan"],["Manager","John, Aileen, Margaret"],["Standard","Sharon and the field team"],
+     ["Purchase orders over €5,000","Graham approves", true],["Stock transfers","John approves", true],["Agents approving anything","never", false]]},
+  {id:"structure", group:"ORGANISATION", title:"Company structure", icon:"structure", tint:"#D9C27A",
+   blurb:"Company details, stock locations and working calendar.",
+   tags:["Founded 2002","Dún Laoghaire","EUR"],
+   listLabel:"COMPANY DETAILS",
+   rows:[["Company","Hogan Healthcare Ltd"],["Founded","2002"],["Address","The Highline, Bakers Point, Pottery Road, Dún Laoghaire, A96 KW29"],
+     ["Stock locations","1 main stockroom + 8 consignment sites (fictional demo accounts)"],["Supplier agencies","10, of which 3 key global partners"],
+     ["Separate business","NICE1 rentals (nice1.ie)"],["Currency and timezone","EUR · Europe/Dublin"]]},
 
   {id:"agents", group:"CONTROL", title:"Agents & AI controls", icon:"agent", tint:"var(--accent)",
-   blurb:"What agents may read, what they may do, and where they must stop.",
-   tags:["7 agents","318 actions today","€0.62 spent"],
+   blurb:"What the eight agents may read, what they may propose, and where they must stop.",
+   tags:["8 agents","read + propose","human approval"],
    heroLabel:"GLOBAL CONTROL", heroAction:"Pause every agent",
-   heroText:"One switch stops every agent immediately. Anything mid-run finishes its current step and then holds.",
-   footer:"Write and external tools always need a yes", action:"Review limits",
+   heroText:"One switch stops every agent immediately. Agents never post financial transactions, approve stock movements or make regulatory decisions.",
+   footer:"Write actions always wait for a person", action:"Review limits",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Create approved agent roles","7 approved"],["Control which data agents can read","by permission"],
-     ["Control which actions agents can take","read · write · external"],["Set approval requirements","all write tools", true],
-     ["Set spending and usage limits","€40/month cap"],["Manage agent memory and retention","90 days"]]},
+   rows:[["Read business records","by role"],["Draft tasks, reminders and plans","allowed", true],["Approve or post anything","never", false],
+     ["Send email to customers","never; people send", false],["Regulated decisions","never", false],["Memory and retention","90 days (demo setting)"]]},
   {id:"wf", group:"CONTROL", title:"Workflow controls", icon:"flow", tint:"#9d8cf5",
-   blurb:"The guardrails, not the builder — that lives under Work.",
-   tags:["Managers only","2 approval rules","Retry twice"],
+   blurb:"Guardrails for routines and automations. Building them lives under Work.",
+   tags:["Managers only","approval gates","retry twice"],
    footer:"Building workflows happens in Work", action:"Open Work",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Who can create workflows","Managers only"],["Maximum autonomy","proposes, never sends", true],
-     ["Approval rules","2 configured"],["Failure handling","retry twice, then notify"],
-     ["Usage limits","500 runs/day"],["Global pause","all workflows", true],["Default notification settings","inbox only"]]},
-  {id:"notif", group:"CONTROL", title:"Notifications", icon:"bell", tint:"#f0994b",
-   blurb:"Which events reach people, on which channel, and when not to.",
-   tags:["Inbox","WhatsApp","Quiet 19:00–07:00"],
+   rows:[["Who can create workflows","Managers"],["Maximum autonomy","proposes, never sends", true],
+     ["Approval gates","transfers, POs, bill holds"],["Failure handling","retry twice, then notify"],["Global pause","all workflows", true]]},
+  {id:"notif", group:"CONTROL", title:"Notifications", icon:"bell", tint:"#E0A98C",
+   blurb:"Which events reach which people, and when not to.",
+   tags:["In-app","Daily briefing 07:00","Quiet 19:00 to 07:00"],
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Which events trigger notifications","14 of 21 events"],["Email","", true],["WhatsApp","", true],
-     ["Mobile push","", false],["In-app","", true],["Escalation rules","after 4 hours unread"],
-     ["Quiet hours","19:00–07:00"],["Daily and weekly summaries","07:00 daily"]]},
+   rows:[["Morning briefing","07:00 weekdays", true],["Stock below par","John and the rep", true],["Order at risk of missing courier","Sharon", true],
+     ["Overdue follow-up","rep and Aileen", true],["Email and mobile push","not connected", false],["Quiet hours","19:00 to 07:00"]]},
 
-  {id:"integrations", group:"SYSTEMS", title:"Integrations", icon:"plug", tint:"#6ad0f0",
-   blurb:"Email, accounting, CRM and messaging — and which way data flows.",
-   tags:["6 connected","1 disconnected","2 read-only"], badge:"Xero down", badgeKind:"bad",
-   footer:"Xero token expired 27 February", action:"Reconnect",
+  {id:"integrations", group:"SYSTEMS", title:"Systems & integrations", icon:"plug", tint:"#7FB8C9",
+   blurb:"The current ERP, accounting, bank feed and websites. What Pulse would read, and what is only a demo today.",
+   tags:["ERP: demo","Xero: to confirm","nothing live"], badge:"Demo · to verify", badgeKind:"warn",
+   footer:"No live system has been connected or accessed", action:"Plan discovery",
    listLabel:"CONNECTIONS",
-   rows:[["Gmail","read and write"],["Xero","disconnected"],["Sage","read only"],["HubSpot","read and write"],
-     ["WhatsApp Business","write only"],["Resend","write only"],["Composio","not connected"]]},
-  {id:"modules", group:"SYSTEMS", title:"Modules & configuration", icon:"modules", tint:"#f0c04b",
-   blurb:"Turn modules on, and make Pulse speak the business's own words.",
-   tags:["3 installed","1 available","2 renamed terms"],
+   rows:[["Current ERP (probably Enterpryze)","demo · to verify"],["Xero","to confirm"],["Bank feed","not verified"],["nice1.ie","not connected"],["Email and calendar","not connected"]]},
+  {id:"modules", group:"SYSTEMS", title:"Modules & configuration", icon:"modules", tint:"#D9C27A",
+   blurb:"Modules switched on for Hogan, and the words Pulse uses.",
+   tags:["7 business modules","medical-device terms"],
    heroLabel:"TERMINOLOGY", heroAction:"Edit terminology",
-   heroText:"Organisation reads as Merchant, and Task reads as Job, everywhere in the interface — including what Helios says back to you.",
+   heroText:"Organisations read as Accounts or Hospitals, stock is held per Location, and every movement carries its Lot or Serial, including in what agents say back to you.",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Enable or disable modules","3 installed"],["Rename business terminology","2 overridden"],
-     ["Create custom fields","9 fields"],["Configure statuses","6 sets"],["Edit record types","7 types"],
-     ["Set required information","per record type"],["Manage form layouts","4 layouts"]]},
+   rows:[["Business modules","Sales, Orders, Inventory, Purchasing, Finance, Compliance, Rentals"],["Rentals module","NICE1, secondary"],
+     ["Custom fields","GTIN / UDI-DI, lot, serial, expiry, MDR class"],["Statuses","order, transfer, bill, rental sets"]]},
   {id:"health", group:"SYSTEMS", title:"Data health", icon:"health", tint:"#e2705c",
-   blurb:"What is wrong with the data, how bad it is, and the fix.",
-   tags:["7 issue types","231 records affected"], badge:"74 duplicates", badgeKind:"bad",
-   footer:"Last scanned 12 minutes ago", action:"Fix 3 automatically",
+   blurb:"What is wrong with the data, how much, and the fix.",
+   tags:["6 issue types","demo data"], badge:"2 missing DoCs", badgeKind:"bad",
+   footer:"Checked against the demo dataset", action:"Open exceptions",
    listLabel:"ISSUES FOUND",
-   trend:[312,289,274,256,248,241,231],
-   bySeverity:[["High","137",RED],["Medium","59",AMBER],["Low","35",DIM]],
-   issues:[["Duplicate records","74","high","Merge on matching name and VAT number","Fix automatically"],
-     ["Missing required fields","62","high","4 organisations have no billing email","Fix automatically"],
-     ["Failed imports","18","medium","Re-run the 14 August Sage batch","Retry"],
-     ["Out-of-date information","41","medium","Not touched in over 18 months","Review"],
-     ["Broken connections","1","high","Xero refresh token expired","Reconnect"],
-     ["Unmatched records","23","low","Invoices with no organisation attached","Review"],
-     ["Records needing review","12","low","Flagged by an agent as inconsistent","Review"]],
+   trend:[31,28,26,24,21,18,14],
+   bySeverity:[["High","5",RED],["Medium","6",AMBER],["Low","9",DIM]],
+   issues:[["Missing declarations of conformity","2","high","HH-OR-239 and HH-OR-233 were received without a DoC on file","Open exception"],
+     ["Integrations not verified","3","high","ERP, Xero and bank feed are demo connections","Open Systems"],
+     ["Count variances","2","medium","Eastgate HH-SM-114 and Westside HH-OR-238 to verify","Open counts"],
+     ["Hand-keyed UDI labels","2","medium","GRN-0412: barcodes unreadable, lots keyed by hand","Open receipt"],
+     ["Unmatched bank lines","3","low","Payments with no clear invoice reference","Open reconciliation"],
+     ["Contacts without a role","6","low","Imported from the ERP without job titles (demo)","Review"]],
    rows:[]},
 
-  {id:"security", group:"GOVERNANCE", title:"Security", icon:"lock", tint:"#8fa6ff",
-   blurb:"Sign-in, sessions, devices and the keys that reach the API.",
-   tags:["SSO on","2FA enforced","3 API keys"], badge:"2 advisories", badgeKind:"warn",
-   footer:"2 security recommendations open", action:"Review",
+  {id:"security", group:"GOVERNANCE", title:"Security & privacy", icon:"lock", tint:"#8fa6ff",
+   blurb:"Sign-in, sessions, and what this demo does and does not claim.",
+   tags:["Demo environment","no patient data"], badge:"Demo", badgeKind:"warn",
+   footer:"Production security to be designed with Hogan", action:"Review",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Single sign-on","Google Workspace", true],["Two-factor authentication","enforced", true],
-     ["Login policies","30-day session"],["Active sessions","51"],["Approved devices","44"],
-     ["IP restrictions","off", false],["Security alerts","on", true],["API keys","3 active"],
-     ["Data retention rules","7 years"]]},
+   rows:[["Patient-identifiable data","none stored", false],["Single sign-on","to configure"],["Two-factor authentication","recommended", true],
+     ["Certification or validation","none claimed for this frontend", false],["GDPR","needs a proper assessment before go-live"],["Data retention rules","to agree"]]},
   {id:"audit", group:"GOVERNANCE", title:"Audit log", icon:"audit", tint:"#9d8cf5",
    blurb:"A locked history of who changed what. Searchable, exportable, never editable.",
-   tags:["Append-only","7-year retention"],
-   footer:"Nobody can edit or delete entries", action:"Export",
+   tags:["Append-only","every demo action"],
+   footer:"Nobody can edit or delete entries", action:"Open Activity",
    listLabel:"WHAT IS RECORDED",
-   rows:[["Permission changes","41 this month"],["Employee access","118"],["Data exports","9"],
-     ["Integration changes","6"],["Agent actions","2,140"],["Deleted records","3"],["Admin changes","27"]]},
+   rows:[["Stock movements","with lot and serial"],["Approvals","who decided, when"],["Agent proposals","and who accepted them"],
+     ["Order scans","line by line"],["Financial exceptions","no postings from Pulse"]]},
   {id:"datamgmt", group:"GOVERNANCE", title:"Data management", icon:"data", tint:"#5fe0a8",
-   blurb:"Import, export, restore and — carefully — delete.",
-   tags:["Backup 02:00","30-day restore"],
-   footer:"Last backup completed 02:00 today", action:"Run backup",
+   blurb:"Import, export and, for this demo, reset to the opening position.",
+   tags:["Demo reset","fictional data"],
+   heroLabel:"DEMO RESET", heroAction:"Reset demo data",
+   heroText:"Puts every story back to its opening position: Harbour at 4 units, SO-1047 at 3 of 5 scanned, Pinewood overdue, INV-6128 open, BILL-2034 unresolved and RN-0208 reserved.",
+   footer:"Reset puts every demo story back to its opening state", action:"Reset demo",
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Import data","CSV, Sage, HubSpot"],["Export data","full or per module"],["Backup status","healthy · 02:00 daily"],
-     ["Restore previous versions","30 days available"],["Merge records","74 candidates"],
-     ["Data retention","7 years"],["Delete company data","requires two admins"]]},
+   rows:[["Import data","from the ERP (planned)"],["Export data","CSV or PDF"],["Demo dataset","fictional, 19 Nov 2026"],
+     ["Reset demo","stories back to the start"]]},
 
   {id:"brand", group:"EXPERIENCE", title:"Branding", icon:"brand", tint:"var(--accent)",
-   blurb:"Logo, accent colour, templates and how agents appear.",
-   tags:["Lime accent","2 templates"],
+   blurb:"Logo, colours and how Hogan Healthcare OS presents itself.",
+   tags:["Hogan logo","demo palette"],
    listLabel:"WHAT YOU CONTROL HERE",
-   rows:[["Company logo","kilbride-mark.svg"],["Pulse accent colour","oklch(0.86 0.19 118)"],
-     ["Email templates","3"],["Document templates","2"],["Agent appearance","12 faces · 6 shells"],
-     ["Customer-facing portal branding","on", true]]},
-  {id:"appearance", group:"EXPERIENCE", title:"Appearance & themes", icon:"brand", tint:"#6ad0f0",
+   rows:[["Company logo","from hoganhealthcare.com"],["Primary","#17374D deep navy (demo choice)"],["Secondary","#267985 teal (demo choice)"],
+     ["Accent","#4A9DA5 aqua (demo choice)"],["Official brand colours","not verified, to replace"],["Product name","Hogan Healthcare OS, powered by Pulse"]]},
+  {id:"appearance", group:"EXPERIENCE", title:"Appearance & themes", icon:"brand", tint:"#7FB8C9",
    blurb:"Pick a light or dark theme for how Pulse looks to you.",
-   tags:["8 themes","4 dark","4 light"],
+   tags:["Hogan navy","Hogan light"],
    listLabel:"THEMES", rows:[]}
 ];
 
@@ -410,128 +430,106 @@ const ADMIN_GROUPS = [
 ];
 
 /* ---- activity feeds ---- */
-const SRC_TINT = {Gmail:"#f07a9d", Pulse:"var(--accent)", Sage:"#6ad0f0", WhatsApp:"#5fe0a8",
-  HubSpot:"#f0994b", Xero:"#8fa6ff", Agent:"var(--accent)"};
-const SRC_ABBR = {Gmail:"GM", Pulse:"PL", Sage:"SG", WhatsApp:"WA", HubSpot:"HS", Xero:"XR", Agent:"AI"};
+const SRC_TINT = {ERP:"#9FB5D9", Pulse:"var(--accent)", Bank:"#D9C27A", Email:"#E0A98C", Scanner:"#8FC7A4", Xero:"#7FB8C9", NICE1:"#B9A9D9", Agent:"var(--accent)"};
+const SRC_ABBR = {ERP:"ER", Pulse:"PL", Bank:"BK", Email:"EM", Scanner:"SC", Xero:"XR", NICE1:"N1", Agent:"AI"};
 
 const DATA_EVENTS = [
-  ["New customer created","McKenna Transport was added from a web enquiry.","Web form","McKenna Transport","Pulse","completed"],
-  ["Invoice imported","INV-10512 for €3,240 arrived from Sage and matched to an open order.","Sage sync","Casey Builders","Sage","completed"],
-  ["Email received","Purchase order attached — parsed and filed against the account.","accounts@caseybuilders.ie","Casey Builders","Gmail","completed"],
-  ["File uploaded","Signed framework 2026.pdf — 6 pages indexed for Helios.","Aoife Nolan","Casey Builders","Pulse","completed"],
-  ["42 records imported","Nightly Sage sync brought in 42 invoice lines across 9 accounts.","Sage sync","9 organisations","Sage","completed"],
-  ["CRM record updated","Credit limit changed on the account after the August review.","HubSpot sync","Fitzgerald Heating","HubSpot","completed"],
-  ["Form submitted","Site survey request for a boiler replacement in Glanmire.","Web form","Ó Riain, Glanmire","Pulse","completed"],
-  ["WhatsApp message received","Photo of the meter reading filed against the visit.","Séamus Byrne","Ballincollig depot","WhatsApp","completed"],
-  ["External system synced","Xero connection retried and failed — token still expired.","Xero","148 invoices queued","Xero","failed"]
+  ["Order lines read from the ERP","12 lines across 4 open orders. Demo activity: connection not yet verified.","ERP sync (demo)","4 open orders","ERP","completed"],
+  ["Usage report received","A consignment site reported units used. Usage order to raise.","Hospital report (demo)","Consignment stock","Email","completed"],
+  ["Courier tracking updated","3 dispatched orders out for delivery.","Courier feed (demo)","Dispatch board","Pulse","completed"],
+  ["Bank lines imported","New lines staged for matching. Demo activity: bank feed not yet verified.","Bank feed (demo)","Reconciliation","Bank","completed"],
+  ["Supplier confirmation received","Nordfix confirmed PO-338 for delivery on 20 Nov.","Supplier email (demo)","PO-338","Email","completed"],
+  ["Price list staged","CONMED 2027 price list staged for review. Not applied.","Supplier file (demo)","CONMED","Pulse","completed"],
+  ["Scanner synced","Handheld uploaded 6 reads from the main stockroom.","Scanner","Main stockroom","Scanner","completed"],
+  ["ERP sync retried","Customer master read failed once, retried and completed. Demo activity.","ERP sync (demo)","Accounts","ERP","completed"]
 ];
 
 const PEOPLE_EVENTS = [
-  ["Aoife approved a refund","€412 written off on INV-10233 after the parts dispute closed.","Aoife Nolan","Glanmire Mechanical","Pulse","completed"],
-  ["Tom changed a booking","Thursday's depot visit moved to 11:00 to fit the delivery window.","Tom Walsh","Ballincollig depot","Pulse","completed"],
-  ["Mac assigned a task","Lease decision handed to himself, due Thursday.","Martin Kilbride","Ballincollig depot","Pulse","completed"],
-  ["Finance uploaded a report","August month-end close workbook, nine sheets.","Aoife Nolan","Head office","Pulse","completed"],
-  ["Niamh edited customer details","Billing email corrected so reminders stop bouncing.","Niamh Cronin","Dunne & Sons Ltd","Pulse","completed"],
-  ["Séamus completed a visit","Warranty callback closed — parts ordered on the spot.","Séamus Byrne","Fitzgerald Heating","Pulse","completed"],
-  ["Purchase order raised","PO-4471 for €14,280 sent up for sign-off.","Aoife Nolan","Munster Plumbing","Pulse","awaiting"],
-  ["Credit limit increase requested","€10,000 to €18,000 — waiting on the second approval.","Niamh Cronin","Casey Builders","Pulse","awaiting"]
+  ["Reviewed the dispatch board","No changes made.","Sharon O'Mongain","Dispatch board","Pulse","completed"]
 ];
 
 const AI_EVENTS = [
-  ["Finance Agent checked 143 invoices","Three accounts over their limit and €41.2k past 60 days.","Finance Agent","3 organisations","Agent","working"],
-  ["Sales Agent qualified a new lead","McKenna Transport scored 82/100 on company size, location and enquiry detail.","Sales Agent","McKenna Transport","HubSpot","working"],
-  ["Operations Agent updated a schedule","Van 04's jobs redistributed across two installers.","Operations Agent","Ballincollig depot","Agent","working"],
-  ["Helios prepared a report","Weekly management one-pager written and filed.","Helios","Management","Agent","working"],
-  ["Agent paused for approval","Chase email to Dunne & Sons drafted — needs your yes before it sends.","Finance Agent","Dunne & Sons Ltd","Agent","awaiting"],
-  ["Workflow failed","Certificate renewal reminder could not find a contact for Mallow yard.","Operations","Mallow yard","Agent","failed"],
-  ["Stock Watch raised order lines","Two lines below reorder point before Thursday's jobs.","Stock Watch","Munster Plumbing","Agent","working"],
-  ["Briefing Agent posted the morning brief","Two items needed you; the rest was noise.","Briefing Agent","Martin Kilbride","WhatsApp","completed"]
+  ["Stock & Traceability Agent checked 8 sites","No new shortfalls since 06:00. Harbour still the only urgent one until it is topped up.","Stock & Traceability Agent","8 consignment sites","Agent","working"],
+  ["Order Flow Agent re-checked open orders","34 open, picking is the bottleneck.","Order Flow Agent","Open orders","Agent","working"],
+  ["Finance Agent re-read the bank feed (demo)","No new lines to match since the last import.","Finance Agent","Reconciliation","Agent","working"],
+  ["Sales Agent refreshed follow-up priorities","Overdue list unchanged. Pinewood still the largest.","Sales Agent","Pipeline","Agent","working"],
+  ["Quality & Compliance Agent checked certificates","One CE certificate within 60 days of expiry.","Quality & Compliance Agent","Quality documents","Agent","working"],
+  ["Purchasing Agent re-ran reorder points","Reorder list unchanged since 09:05.","Purchasing Agent","Main stockroom","Agent","working"]
 ];
 
 const STREAM_DEFS = [
   {id:"data", title:"New data", sub:"Information entering Pulse", pool:DATA_EVENTS, every:3200,
    tint:"#6ad0f0", icon:"M4.5 7.5c0-1.7 3.4-3 7.5-3s7.5 1.3 7.5 3-3.4 3-7.5 3-7.5-1.3-7.5-3Z M4.5 7.5v9c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-9 M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"},
-  {id:"people", title:"Employee activity", sub:"Decisions people made", pool:PEOPLE_EVENTS, every:6400,
+  {id:"people", title:"Employee activity", sub:"Decisions people made", pool:PEOPLE_EVENTS, every:86400000,
    tint:"#f0c04b", icon:"M12 12.5a3.6 3.6 0 1 0 0-7.2 3.6 3.6 0 0 0 0 7.2Z M5 20.2c.9-3.1 3.6-4.9 7-4.9s6.1 1.8 7 4.9"},
   {id:"ai", title:"AI activity", sub:"Agents at work", pool:AI_EVENTS, every:4600,
    tint:"var(--accent)", icon:"M2 12h4l2.5-6 3.5 12 3-8 2 2h5"}
 ];
 
 const NAV = [
+  {group:"Workspace"},
   {label:"Home", icon:"helios", page:"Home"},
   {label:"Agents", icon:"navAgents", page:"Agents"},
-  {label:"Dashboard", icon:"navDash", page:"Dashboard", dot:true},
+  {label:"Dashboard", icon:"navDash", page:"Dashboard"},
   {label:"Work", icon:"navWork", page:"Work"},
+  {group:"Business operations"},
+  {label:"Sales", icon:"navSales", page:"Sales"},
+  {label:"Orders", icon:"navOrders", page:"Orders"},
+  {label:"Inventory", icon:"navInventory", page:"Inventory"},
+  {label:"Purchasing", icon:"navPurchasing", page:"Purchasing"},
+  {label:"Finance", icon:"navFinance", page:"Finance"},
+  {label:"Compliance", icon:"navCompliance", page:"Compliance"},
+  {label:"Rentals", icon:"navRentals", page:"Rentals"},
+  {group:"System"},
   {label:"Records", icon:"navRecords", page:"Records"},
-  {label:"Activity", icon:"pulseLine", page:"Activity", dot:true}
+  {label:"Activity", icon:"pulseLine", page:"Activity"},
+  {label:"Settings", icon:"navSettings", page:"Settings"}
 ];
 
 /* Inbox items follow the real InboxItem shape: what happened, why it matters, what I can do. */
 const ITEMS = {
-  po:{kind:"Approval", importance:"high", icon:ICONS.approvals, age:"18m",
-    title:"Purchase order PO-4471 — €14,280",
-    why:"Raised by Aoife Nolan. €4,280 above your sign-off threshold, so it routed to you.",
-    detail:"Both lines are below reorder point and committed to Thursday's jobs. Pricing matches the June supplier agreement. Approving writes the decision as you and fires core.approval.updated.",
+  po:{kind:"Approval", importance:"high", icon:ICONS.approvals, age:"1d",
+    title:"Purchase order PO-341 to Halcyon Orthopaedics",
+    why:"Raised by Sharon O'Mongain. Over the €5,000 sign-off threshold, so it routed to you.",
+    detail:"Restock of three fast-moving fixation lines. Pricing matches the current agreement. Approving records the decision as you.",
     actionLabel:"Approve", secondaryLabel:"Request changes", group:"Approvals",
-    fields:[{k:"Provider",v:"core.approvals"},{k:"Requested by",v:"Aoife Nolan"},{k:"Value",v:"€14,280"},{k:"Record",v:"PO-4471"}],
-    history:[{when:"Today 08:54",text:"Aoife Nolan raised the request"},{when:"Today 08:54",text:"Routed to Martin Kilbride — over threshold"}]},
-  sync:{kind:"Alert", importance:"critical", icon:ICONS.health, age:"6h",
-    title:"Xero sync failed — expired token",
-    why:"148 invoices have been queued since 02:14. Reconnecting posts them automatically.",
-    detail:"The refresh token was last authorised on 27 February. Third failure this year; moving the connection to the service account would stop it recurring. The dispatcher retried twice before dead-lettering.",
-    actionLabel:"Reconnect", secondaryLabel:"Snooze", group:"Alerts",
-    fields:[{k:"Provider",v:"core.notifications"},{k:"Integration",v:"Xero"},{k:"Queued",v:"148 invoices"},{k:"Event",v:"core.automation.failed"}],
-    history:[{when:"Today 02:14",text:"Sync failed — invalid_grant"},{when:"Today 02:16",text:"Retried twice, then dead-lettered"}]},
-  visit:{kind:"Task", importance:"high", icon:ICONS.visits, age:"2h",
-    title:"Site visit at Ballincollig depot is unassigned",
-    why:"Scheduled for tomorrow 09:00 with no installer against it.",
-    detail:"Contributed by the site-visits module through its own inbox provider. Core never learns what a visit is — it sorts by importance and age like everything else.",
-    actionLabel:"Assign installer", secondaryLabel:"Reschedule", group:"Work",
-    fields:[{k:"Provider",v:"site-visits.unassigned"},{k:"Entity",v:"site-visits.visit"},{k:"Scheduled",v:"Tomorrow 09:00"},{k:"Status",v:"scheduled"}],
-    history:[{when:"Yesterday 16:20",text:"Visit created by Tom Walsh"},{when:"Today 07:00",text:"Flagged unassigned by the briefing job"}]},
-  auto:{kind:"Alert", importance:"normal", icon:ICONS.autos, age:"3h",
-    title:"“Overdue reminder” skipped 4 contacts",
-    why:"Four organisations have no billing email, so the send step could not run.",
-    detail:"The automation ran at 08:00 and sent six of ten reminders. Each step is recorded in automation_run_steps with its input, output and error.",
-    actionLabel:"Fix the records", secondaryLabel:"Disable step", group:"Automations",
-    fields:[{k:"Automation",v:"Overdue invoice reminder"},{k:"Run",v:"partial"},{k:"Sent",v:"6 of 10"},{k:"Failed step",v:"notify.email"}],
-    history:[{when:"Today 08:00",text:"Run completed with warnings"},{when:"Yesterday 08:00",text:"Same 4 records skipped"}]},
-  task:{kind:"Task", importance:"normal", icon:ICONS.work, age:"Thu",
-    title:"Ballincollig lease renewal closes Thursday",
-    why:"No decision recorded against the contract and the notice period is 30 days.",
-    detail:"The lease runs to 31 October. Ballincollig carried 38% of counter revenue this year; rent is 4.1% of that.",
-    actionLabel:"Open record", secondaryLabel:"Assign", group:"Work",
-    fields:[{k:"Provider",v:"core.tasks"},{k:"Due",v:"Thu 27 Aug"},{k:"Assignee",v:"Martin Kilbride"},{k:"Priority",v:"high"}],
-    history:[{when:"18 Aug",text:"Task materialised from a recurring rule"},{when:"2 Feb",text:"Contract uploaded by Aoife Nolan"}]}
+    fields:[{k:"Requested by",v:"Sharon O'Mongain"},{k:"Supplier",v:"Halcyon Orthopaedics"},{k:"Record",v:"PO-341"}],
+    history:[{when:"18 Nov 16:20",text:"Sharon raised the request"},{when:"18 Nov 16:20",text:"Routed to Graham Hogan, over threshold"}]},
+  sync:{kind:"Alert", importance:"critical", icon:ICONS.health, age:"today",
+    title:"ERP connection not yet verified",
+    why:"Pulse is running on fictional demo data. Verifying the connection is a discovery step.",
+    detail:"No live system has been connected or read in this demo.",
+    actionLabel:"Open Systems", secondaryLabel:"Snooze", group:"Alerts",
+    fields:[{k:"System",v:"Current ERP (to confirm)"},{k:"Status",v:"Demo"}],
+    history:[{when:"Today",text:"Demo environment started"}]},
+  visit:{kind:"Task", importance:"high", icon:ICONS.visits, age:"2d",
+    title:"ACL loan set needed at Liffey for 24 Nov",
+    why:"Requested by the clinic. Dispatch by 23 Nov.",
+    detail:"LS-01 is inspected and sealed in the main stockroom.",
+    actionLabel:"Prepare set", secondaryLabel:"Reschedule", group:"Work",
+    fields:[{k:"Set",v:"LS-01"},{k:"Procedure date",v:"24 Nov"}],
+    history:[{when:"17 Nov",text:"Request logged by John Culkin"}]},
+  auto:{kind:"Alert", importance:"normal", icon:ICONS.autos, age:"today",
+    title:"BILL-2034 does not match PO-337",
+    why:"Billed 14, ordered and received 12. Held for Margaret.",
+    detail:"The three-way match failed on quantity. Nothing has been posted.",
+    actionLabel:"Open the bill", secondaryLabel:"Assign", group:"Automations",
+    fields:[{k:"Bill",v:"BILL-2034"},{k:"Variance",v:"2 units, €580"}],
+    history:[{when:"Today 09:05",text:"Purchasing Agent flagged the mismatch"}]},
+  task:{kind:"Task", importance:"normal", icon:ICONS.work, age:"Fri",
+    title:"Friday team review: plan next week",
+    why:"Seven follow-ups are overdue going into next week.",
+    detail:"The Sales Agent has drafted plans that wait for approval in the Weekly Planner.",
+    actionLabel:"Open planner", secondaryLabel:"Assign", group:"Work",
+    fields:[{k:"Owner",v:"Graham Hogan"},{k:"Due",v:"Fri 20 Nov"}],
+    history:[{when:"Today",text:"Task created from the weekly routine"}]}
 };
 const ORDER = ["sync","po","visit","auto","task"];
 
 const ANSWERS = {
-  credit:{tool:"core_search", effect:"read",
-    text:"Three organisations are over their agreed limit this morning, and €41.2k of the balance is past 60 days. Dunne & Sons is the one to act on: days-to-pay went from 12 to 74 since May while order volume held steady.",
-    cols:["Organisation","Balance","Over","Oldest"],
-    rows:[["Dunne & Sons","€28,410","€8,410","74d"],["Fitzgerald Heating","€9,240","€2,240","63d"],["Riverside Devs","€3,560","€560","61d"]],
-    actions:[["Draft chase emails",1],["Open Dunne & Sons",0]]},
-  jobs:{tool:"core_tasks_find", effect:"read",
-    text:"Eleven tasks are past their due date. Two slipped on Friday when Van 04 went off the road at Ballincollig; the other nine are waiting on stock. Ballincollig carries seven of the eleven, well above its usual share.",
-    cols:["Task","Subject","Late","Owner"],
-    rows:[["Boiler swap follow-up","Ó Riain, Glanmire","4d","S. Byrne"],["Bathroom fit sign-off","Casey Builders","3d","T. Walsh"],["Rad replace invoice","Kelleher, Cobh","2d","S. Byrne"]],
-    actions:[["Reassign the two van tasks",1],["Open Work → Overdue",0]]},
-  chase:{tool:"core_email_draft", effect:"write", confirm:true,
-    confirmSummary:"Send one chase email to accounts@dunneandsons.ie referencing INV-10428 (€28,410, 74 days), offering two instalments to 30 September.",
-    text:"Drafted. This is a write tool, so I have not sent it — the proposal is stored with a hash of the exact arguments, and confirming replays those stored arguments rather than anything from your yes.",
-    actions:[["Confirm and send",1],["Edit draft",0]]},
-  sync:{tool:"core_operations_health", effect:"read",
-    text:"The Xero connection failed at 02:14 with an expired refresh token — last authorised 27 February. Nothing was lost: 148 invoices are queued and post once reconnected. This is the third token failure this year, so it is worth moving the connection to the service account.",
-    actions:[["Open System health",1],["Assign to Aoife",0]]},
-  visits:{tool:"site_visits_find", effect:"read",
-    text:"Four site visits are booked this week and one has no installer against it. That tool is contributed by the site-visits module, not core — installing the module is what gave me the ability to answer this.",
-    cols:["Visit","Organisation","When","Status"],
-    rows:[["Boiler service","Casey Builders","Wed 09:00","scheduled"],["Survey","Ó Riain","Wed 14:00","scheduled"],["Depot check","Ballincollig","Thu 09:00","unassigned"]],
-    actions:[["Assign the unassigned visit",1],["Open Site visits",0]]},
-  fallback:{tool:"core_search", effect:"read",
-    text:"I can answer that from the records you have access to. Everything I reach goes through a registered tool with a declared permission — there is no SQL tool — and a record you may not see comes back as not found rather than forbidden.",
-    actions:[["Show me what you can do",0]]}
+  fallback:{tool:"pulse_search", effect:"read",
+    text:"I can answer from every record in this demo. Anything with an effect is proposed and waits for a person.",
+    actions:[["What needs my attention?",0]]}
 };
 
 // Turns a plain-English filter name into a full dashboard area — the "primitive
@@ -560,12 +558,12 @@ function synthesizeCustomArea(name){
   else if (has("customer","client","retention","account")) vocab = "customer";
 
   const V = {
-    region:   {labels:["New enquiries","Orders won","Revenue","Site coverage"], unit:"EUR — 30 DAYS"},
-    cost:     {labels:["Spend","Cost per job","Savings found","Budget used"], unit:"EUR — 30 DAYS"},
+    region:   {labels:["New enquiries","Orders won","Revenue","Site coverage"], unit:"EUR · 30 DAYS"},
+    cost:     {labels:["Spend","Cost per job","Savings found","Budget used"], unit:"EUR · 30 DAYS"},
     people:   {labels:["Headcount","Open roles","Time to hire","Retention"], unit:"PEOPLE"},
     ops:      {labels:["Stock cover","Lead time","Stockouts","Reorders raised"], unit:"DAYS"},
     customer: {labels:["Active accounts","Repeat rate","Churn","NPS"], unit:"ACCOUNTS"},
-    generic:  {labels:["Volume","Rate","Cost","Coverage"], unit:"ACTIVITY — 30 DAYS"}
+    generic:  {labels:["Volume","Rate","Cost","Coverage"], unit:"ACTIVITY · 30 DAYS"}
   }[vocab];
 
   const months = ["Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"];
@@ -601,107 +599,131 @@ function synthesizeCustomArea(name){
 }
 
 function pickAnswer(q){
-  const s = q.toLowerCase();
-  if (/visit|site visit|installer/.test(s)) return ANSWERS.visits;
-  if (/chase|email|draft|send/.test(s)) return ANSWERS.chase;
-  if (/credit|limit|debtor|owe|outstanding|dunne/.test(s)) return ANSWERS.credit;
-  if (/task|late|overdue|slip|work/.test(s)) return ANSWERS.jobs;
-  if (/sync|xero|integration|token|fail|broke|health/.test(s)) return ANSWERS.sync;
   return ANSWERS.fallback;
 }
 
 const ORGS = [
-  ["Dunne & Sons Ltd","Customer","€28,410","74 days","on stop"],
-  ["Casey Builders","Customer","€6,120","12 days","active"],
-  ["Fitzgerald Heating","Customer","€9,240","63 days","watch"],
-  ["Munster Plumbing Supplies","Supplier","—","—","active"],
-  ["Riverside Developments","Customer","€3,560","61 days","watch"],
-  ["Glanmire Mechanical","Customer","€1,180","8 days","active"]
+  ["Harbour Orthopaedic Clinic","Customer","€8,750","21 days","watch"],
+  ["South Dublin Surgical Centre","Customer","€0","current","active"],
+  ["Liffey Surgical Clinic","Customer","€1,425","18 days","active"],
+  ["Halcyon Orthopaedics","Supplier","n/a","n/a","active"],
+  ["Eastgate Orthopaedics","Customer","€2,310","28 days","watch"],
+  ["Atlantic Sports Surgery","Customer","€2,180","22 days","active"]
 ];
 const TEAMS = [
-  ["Accounts","3 members","Aoife Nolan","core:approval:decide"],
-  ["Installers","9 members","Séamus Byrne","core:task:update"],
-  ["Trade counter","6 members","Niamh Cronin","core:person:view"],
-  ["Management","2 members","Martin Kilbride","all core permissions"]
+  ["Management","2 members","Graham Hogan","all permissions"],
+  ["Sales","4 members","Aileen Cahalane","accounts, opportunities, plans"],
+  ["Orders and office","2 members","Margaret Duff","orders, receivables, payables"],
+  ["Operations","1 member","John Culkin","stock, transfers, loan sets, rentals"]
 ];
 const LOCATIONS = [
-  ["Head office","Little Island, Cork","14 staff","active"],
-  ["Ballincollig depot","Ballincollig, Cork","14 staff","lease review"],
-  ["Mallow yard","Mallow, Cork","4 staff","active"]
+  ["Dún Laoghaire main stockroom","The Highline, Dún Laoghaire","office team","active"],
+  ["Harbour Orthopaedic Clinic","Consignment site (fictional)","par levels","below par"],
+  ["South Dublin Surgical Centre","Consignment site (fictional)","par levels","active"]
 ];
 
 const AGENT_DEFS = [
-  {id:"close", name:"Month-end close", shape:"rim-capsule", tint:"#1b2430", state:"working", group:true,
-   members:["credit","briefing","ops"], role:"Credit Control, Briefing and Ops Watchdog working the same close",
-   when:"09:12", preview:"credit control: three accounts still open.",
+  {id:"briefing", name:"Briefing Agent", shape:"crown-pebble", tint:"#191c1f", state:"complete", role:"Reads the whole business every morning and tells Graham the few things that matter",
+   when:"07:02", preview:"three things need attention today.",
    thread:[
-     {kind:"stamp", text:"Today 09:04"},
-     {kind:"routine", text:"Ran routine", routine:"Month-end close"},
-     {kind:"agent", from:"credit", text:"three accounts are still open on the August ledger. Dunne & Sons is the only one that changed behaviour rather than just running late."},
-     {kind:"agent", from:"ops", text:"nothing technical is holding it up — the Xero token is back and all 148 queued invoices posted at 09:02."},
-     {kind:"agent", from:"briefing", text:"so the close is one decision, not three: what to do about Dunne. everything else reconciles."},
-     {kind:"user", text:"instalments, two payments to end of september"},
-     {kind:"agent", from:"credit", text:"drafted on those terms and parked it. sending is a write tool, so it waits for your yes."},
-     {kind:"agent", from:"briefing", text:"once that goes, August closes. i'll put the confirmation in tomorrow's briefing."}
-   ]},
-  {id:"briefing", name:"Briefing", shape:"crown-pebble", tint:"#191c1f", state:"complete", role:"Reads the whole business every morning and tells you the two things that matter",
-   when:"08:02", preview:"three things moved overnight. two need you.",
-   thread:[
-     {kind:"stamp", text:"Today 08:00"},
+     {kind:"stamp", text:"Today 07:00"},
      {kind:"routine", text:"Ran routine", routine:"Morning briefing"},
-     {kind:"agent", text:"morning briefing:", lines:[
-       {k:"Cash", v:"€41.2k past 60 days · Dunne & Sons is 74 days"},
-       {k:"Work", v:"11 tasks late · 7 of them at Ballincollig"},
-       {k:"Approvals", v:"PO-4471 sitting with you since 08:54"}]},
-     {kind:"agent", text:"two things need you today: the purchase order, and a yes/no on the Ballincollig lease. everything else is covered."},
-     {kind:"user", text:"put the lease on Thursday"},
-     {kind:"agent", text:"done — task created against Ballincollig depot, due Thursday, assigned to you. i'll remind you Wednesday afternoon."}
+     {kind:"agent", text:"morning briefing for thursday 19 november (demo data):", lines:[
+       {k:"Stock", v:"Harbour has 4 × HH-OR-204 against a par of 6"},
+       {k:"Orders", v:"SO-1047 needs 2 more scans before the 16:00 courier"},
+       {k:"Sales", v:"7 follow-ups overdue, largest Pinewood Orthopaedics €16,800"},
+       {k:"Cash", v:"12 invoices overdue, €23,800 · INV-6128 Harbour €8,750"}]},
+     {kind:"agent", text:"three of those need a person today: John's approval on the Harbour transfer, Sharon's last two scans, and a plan for Aileen's Pinewood follow-up. the invoices are with Margaret."},
+     {kind:"user", text:"put pinewood on aileen's thursday"},
+     {kind:"agent", text:"it is already on her day at 12:00. i've flagged it high in My Day and on Friday's team review so it doesn't slip a third week."}
    ]},
-  {id:"credit", name:"Credit Control", shape:"executive-capsule", tint:"#2a2118", state:"waiting", role:"Watches payment behaviour and drafts the chase before you ask",
-   when:"Yesterday", preview:"three drafts parked. nothing sent.",
+  {id:"ops", name:"Ops Watchdog", shape:"shield", tint:"#2b1b1e", state:"attention", role:"Watches orders, tasks and exceptions and says when something has stopped moving",
+   when:"11:52", preview:"SO-1047 at risk of missing the 16:00 courier.",
    thread:[
-     {kind:"stamp", text:"Yesterday 16:40"},
-     {kind:"agent", text:"three accounts changed behaviour this week. i've drafted a chase for each and parked them — sending is a write tool, so they wait for you."},
-     {kind:"user", text:"what changed on dunne"},
-     {kind:"agent", text:"days-to-pay went 12 → 74 since May while order volume held steady. that pattern is a cash problem, not a dispute. i'd offer two instalments to 30 September before putting them on stop again."}
+     {kind:"stamp", text:"Today 10:02"},
+     {kind:"agent", text:"four orders (SO-1025 to SO-1028) are packed with no courier booked since yesterday. the 12:00 collection can take all four."},
+     {kind:"stamp", text:"Today 11:52"},
+     {kind:"agent", text:"SO-1047 for South Dublin Surgical Centre is 3 of 5 scanned. the two left need a lot and expiry (Arthrosamid pack) and a serial (battery pack). at the current pace it misses the 16:00 cut-off."},
+     {kind:"user", text:"who's on it"},
+     {kind:"agent", text:"Sharon. it's top of her task list and the picking screen has both items queued. i won't touch the order myself: scans are hers."}
    ]},
-  {id:"visits", name:"Visit Scout", shape:"low-dome", tint:"#241b2e", state:"working", role:"Keeps the site-visit board honest and chases unassigned work",
-   when:"Yesterday", preview:"thursday's depot check still has nobody on it.",
+  {id:"stock", name:"Stock & Traceability Agent", shape:"control-cube", tint:"#16241f", state:"waiting", role:"Hospital consignment levels, expiring lots, count variances and where every lot went",
+   when:"06:00", preview:"harbour below par on HH-OR-204. transfer drafted.",
    thread:[
-     {kind:"stamp", text:"Yesterday 07:00"},
-     {kind:"agent", text:"four visits booked this week, one unassigned: Thursday 09:00 depot stock check. Séamus is the only installer free that morning."},
-     {kind:"user", text:"give it to séamus"},
-     {kind:"agent", text:"assigned. the module fired site-visits.visit.updated and the escalation automation stood down."}
+     {kind:"stamp", text:"Today 06:00"},
+     {kind:"routine", text:"Ran routine", routine:"Hospital stock watch"},
+     {kind:"agent", text:"Harbour Orthopaedic Clinic used 2 × HH-OR-204 since October and is down to 4 against a par level of 6.", lines:[
+       {k:"Main stockroom", v:"6 on hand · lot L2609-204B · expires Aug 2031"},
+       {k:"Harbour", v:"4 on hand · par 6"},
+       {k:"South Dublin", v:"2 on hand · par 2"},
+       {k:"Suggestion", v:"move 3 to Harbour, leaving it at 7"}]},
+     {kind:"agent", text:"stock only moves when John approves. after it does, the main stockroom drops to 3, below its reorder point, so i'll hand that to the Purchasing Agent."},
+     {kind:"agent", text:"also: 4 ablation probes at Riverpark expire 31 Dec and Eastgate counted 4 where the system says 5 on HH-SM-114. both are with John."}
    ]},
-  {id:"stock", name:"Stock Watch", shape:"control-cube", tint:"#16241f", state:"thinking", role:"Reorder points, supplier lead times and what Thursday's jobs actually need",
-   when:"Mon", preview:"two lines below reorder point before thursday.",
+  {id:"sales", name:"Sales Agent", shape:"executive-capsule", tint:"#2a2118", state:"working", role:"Prioritises follow-ups, spots quiet accounts and drafts each rep's week for approval",
+   when:"08:15", preview:"7 follow-ups overdue. pinewood quiet 19 days.",
    thread:[
-     {kind:"stamp", text:"Monday 11:20"},
-     {kind:"agent", text:"two lines drop below reorder point before Thursday's jobs. Munster can cover both at the June agreement price — that's what PO-4471 is."}
+     {kind:"stamp", text:"Today 08:15"},
+     {kind:"agent", text:"seven open opportunities have an overdue follow-up, worth €68,400 together. the oldest:", lines:[
+       {k:"Pinewood Orthopaedics", v:"€16,800 · Aileen · quiet 19 days"},
+       {k:"Lakeside Orthopaedic Group", v:"€13,400 · Rory · quote QT-2207 unanswered"},
+       {k:"Meadowbank Private Hospital", v:"€11,600 · Aileen · tender questions due 17 Nov"}]},
+     {kind:"agent", text:"i can draft next week for each rep from this. it stays a draft until Graham or the rep approves it in the Weekly Planner."},
+     {kind:"user", text:"do aileen first"},
+     {kind:"agent", text:"drafted for w/c 23 Nov: Pinewood follow-up on Monday morning, Meadowbank tender on Tuesday, two account visits she hasn't made in a fortnight. waiting for approval."}
    ]},
-  {id:"ops", name:"Ops Watchdog", shape:"shield", tint:"#2b1b1e", state:"attention", role:"Sits on the event queue and tells you when something stopped working",
-   when:"02:16", preview:"xero token expired. 148 invoices queued, nothing lost.",
+  {id:"orders", name:"Order Flow Agent", shape:"low-dome", tint:"#241b2e", state:"working", role:"Finds incomplete orders, missing scans and dispatch bottlenecks before the courier does",
+   when:"10:02", preview:"6 orders picking. 2 with issues.",
    thread:[
-     {kind:"stamp", text:"Today 02:16"},
-     {kind:"agent", text:"the Xero connection failed at 02:14 — invalid_grant, token last authorised 27 February. 148 invoices are queued and post on reconnect. third time this year; move it to the service account."}
+     {kind:"stamp", text:"Today 10:02"},
+     {kind:"agent", text:"34 orders open. the bottleneck today is picking, not stock:", lines:[
+       {k:"Picking", v:"6 orders, SO-1047 is the urgent one"},
+       {k:"Packed, no courier", v:"SO-1025 to SO-1028"},
+       {k:"Issues", v:"SO-1023 waiting on a hospital PO number, SO-1024 short one line"}]},
+     {kind:"agent", text:"orders are taking about 39 minutes each to handle this week. most of that is re-keying lot numbers. scanning removes the re-keying; we will measure the difference after go-live rather than guess it."}
    ]},
-  {id:"counter", name:"Counter Assistant", shape:"offset-pebble", tint:"#191c1f", state:"working", role:"Answers trade-counter questions on price, stock and account status",
-   when:"Fri", preview:"14 questions answered, 2 handed to niamh.",
+  {id:"finance", name:"Finance Agent", shape:"offset-pebble", tint:"#191c1f", state:"waiting", role:"Reviews unpaid invoices, bank matches, margins and anomalies. Drafts, never posts",
+   when:"08:30", preview:"12 invoices overdue, €23,800. 4 bank matches ready.",
    thread:[
-     {kind:"stamp", text:"Friday 17:30"},
-     {kind:"agent", text:"14 counter questions answered this week. two went to Niamh: both were credit-limit calls, which i won't make on my own."}
+     {kind:"stamp", text:"Today 08:30"},
+     {kind:"agent", text:"receivables this morning (demo data):", lines:[
+       {k:"Overdue", v:"12 invoices · €23,800"},
+       {k:"Largest", v:"INV-6128 · Harbour · €8,750 · 21 days"},
+       {k:"Bank", v:"14 lines in, 6 suggested matches"}]},
+     {kind:"agent", text:"i've drafted a reminder for INV-6128 for Margaret to send. nothing goes to a customer from me."},
+     {kind:"stamp", text:"Today 09:05"},
+     {kind:"agent", text:"BILL-2034 from Aquila bills 14 anchors but PO-337 and GRN-0419 both say 12. that's €580 for goods we never received. suggest Margaret asks for a credit note and holds the difference. i haven't approved or posted anything."}
+   ]},
+  {id:"purchasing", name:"Purchasing Agent", shape:"wide-eyed", tint:"#1b2430", state:"thinking", role:"Suggests purchase orders and transfers from real stock needs and checks every bill against its PO",
+   when:"09:05", preview:"5 lines below reorder point. PO-341 waiting on graham.",
+   thread:[
+     {kind:"stamp", text:"Today 09:05"},
+     {kind:"agent", text:"five central lines are below their reorder point after open orders and stock on order. biggest gap is the 25 × 90 mm saw blades."},
+     {kind:"agent", text:"PO-341 to Halcyon is waiting on Graham because it's over €5,000. PO-333 from Veritas is 16 days late on two tibial nails; supplier now says 24 Nov."},
+     {kind:"user", text:"what about the anchors bill"},
+     {kind:"agent", text:"three-way match fails on BILL-2034: ordered 12, received 12, billed 14. i've passed it to Margaret through the Finance Agent. the bill is held, not paid."}
+   ]},
+  {id:"quality", name:"Quality & Compliance Agent", shape:"precision-brow", tint:"#16241f", state:"attention", role:"Flags missing documents, traceability gaps and audit work that needs a person to review",
+   when:"10:34", preview:"2 DoCs missing. CE certificate expires 8 Jan.",
+   thread:[
+     {kind:"stamp", text:"Today 10:34"},
+     {kind:"agent", text:"three things for a person to look at (none is a regulatory decision i can make):", lines:[
+       {k:"Documentation", v:"no declaration of conformity on file for 2 Nordfix SKUs"},
+       {k:"Certificates", v:"Polaris consumables CE certificate expires 8 Jan"},
+       {k:"Traceability", v:"GRN-0412 had two labels keyed by hand"}]},
+     {kind:"agent", text:"the traceability SOP is overdue for review since 2 November. a simulated drill on HH-OR-204 lot L2603-204A would exercise it; it's an exercise, not a recall."}
    ]}
 ];
 
 const KPI_DEFS = {
-  revenue:{label:"Revenue", value:"€412,800", delta:"+6.2%", dir:"up", hint:"30 days", hero:true},
-  cash:{label:"Cash collected", value:"€368,140", delta:"+4.1%", dir:"up", hint:"30 days"},
-  overdue:{label:"Overdue debt", value:"€41,200", delta:"+€8,410", dir:"down", hint:"60 days+"},
-  margin:{label:"Gross margin", value:"31.4%", delta:"−0.6pt", dir:"down", hint:"vs last month"},
-  jobs:{label:"Jobs completed", value:"126", delta:"+4", dir:"up", hint:"30 days"},
-  nps:{label:"Repeat rate", value:"68%", delta:"+3pt", dir:"up", hint:"customers ordering again"},
-  pipeline:{label:"Open pipeline", value:"€212,400", delta:"+11%", dir:"up", hint:"quoted, not won"},
-  utilisation:{label:"Installer hours", value:"84%", delta:"−2pt", dir:"down", hint:"billable share"}
+  revenue:{label:"Revenue · Nov to date", value:"€165,400", delta:"−5.2%", dir:"down", hint:"vs Oct daily pace · demo", hero:true},
+  ebitda:{label:"EBITDA · Nov to date", value:"€25,700", delta:"15.5%", dir:"up", hint:"margin · demo"},
+  margin:{label:"Gross margin", value:"38.8%", delta:"−0.1pt", dir:"down", hint:"vs October · demo"},
+  orders:{label:"Open orders", value:"34", delta:"6 picking", dir:"up", hint:"live demo state"},
+  units:{label:"Stock units", value:"1,240", delta:"420", dir:"up", hint:"held at hospitals"},
+  overdue:{label:"Overdue invoices", value:"€23,800", delta:"12", dir:"down", hint:"invoices past due"},
+  pipeline:{label:"Open pipeline", value:"€186,500", delta:"26", dir:"up", hint:"open opportunities"},
+  followups:{label:"Overdue follow-ups", value:"7", delta:"of 26", dir:"down", hint:"opportunities"}
 };
 
 const ASPECT_DEFS = [
@@ -711,7 +733,7 @@ const ASPECT_DEFS = [
    splitTitle:"Where it came from",
    split:[["Trade counter","€214.6k","72%",1],["Contract accounts","€156.8k","53%",0],["Online orders","€41.4k","18%",0]],
    tableCols:["Account","Revenue","Change","Owner"],
-   table:[["Casey Builders","€48,210","+12.4%","Niamh Cronin"],["Dunne & Sons Ltd","€28,410","−18.2%","Aoife Nolan"],["Fitzgerald Heating","€21,860","+4.1%","Niamh Cronin"],["Riverside Developments","€18,240","+9.6%","Tom Walsh"]],
+   table:[["Harbour Orthopaedic Clinic","€48,210","+12.4%","Aileen Cahalane"],["South Dublin Surgical Centre","€8,750","−18.2%","Margaret Duff"],["Liffey Surgical Clinic","€21,860","+4.1%","Aileen Cahalane"],["Eastgate Orthopaedics","€18,240","+9.6%","John Culkin"]],
    metrics:[["Revenue","€412,800","+6.2%","up","30 days",[.4,.55,.44,.62,.5,.7,.6,.78,1]],
      ["Orders","318","+22","up","30 days",[.5,.6,.44,.7,.55,.75,.62,.8,.9]],
      ["Average order","€1,298","+1.8%","up","vs last month",[.6,.58,.62,.6,.66,.64,.7,.68,.74]],
@@ -722,13 +744,13 @@ const ASPECT_DEFS = [
    splitTitle:"Runs by module",
    split:[["core","1,042","81%",1],["site-visits","198","15%",0],["ui-showcase","44","4%",0]],
    tableCols:["Module","Version","Contributions","State"],
-   table:[["core","0.1.0","31 routes · 21 events","always installed"],["site-visits","1.0.0","1 entity · 2 tools","installed"],["ui-showcase","0.1.0","3 pages","installed"],["wholesale","—","6 entities · 9 tools","available"]],
+   table:[["core","0.1.0","31 routes · 21 events","always installed"],["site-visits","1.0.0","1 entity · 2 tools","installed"],["ui-showcase","0.1.0","3 pages","installed"],["wholesale","n/a","6 entities · 9 tools","available"]],
    metrics:[["Modules live","3","+1","up","this quarter",[.2,.2,.4,.4,.4,.6,.6,.6,1]],
-     ["Helios tools","11","+2","up","registered",[.4,.44,.5,.5,.6,.6,.7,.8,.9]],
+     ["Pulse tools","11","+2","up","registered",[.4,.44,.5,.5,.6,.6,.7,.8,.9]],
      ["Automation runs","1,284","+9%","up","30 days",[.5,.55,.6,.58,.66,.7,.72,.8,.86]],
      ["Failure rate","0.9%","−0.4pt","up","of all runs",[.8,.74,.7,.62,.6,.5,.44,.4,.32]]]},
   {id:"marketing", label:"Marketing", color:"#e6c78a", owner:"AOIFE NOLAN", description:"Reach, enquiries and what turned into an account.",
-   kind:"funnel", funnel:[["Enquiries","184","—",184],["Quoted","96","52% of enquiries",96],["Won","39","41% of quotes",39],["Repeat order","12","31% of wins",12]], chartTitle:"Enquiry to repeat order", chartUnit:"CONVERSION",
+   kind:"funnel", funnel:[["Enquiries","184","n/a",184],["Quoted","96","52% of enquiries",96],["Won","39","41% of quotes",39],["Repeat order","12","31% of wins",12]], chartTitle:"Enquiry to repeat order", chartUnit:"CONVERSION",
    chart:[["Sep",96,"96"],["Oct",104,"104"],["Nov",88,"88"],["Dec",112,"112"],["Jan",124,"124"],["Feb",118,"118"],["Mar",136,"136"],["Apr",142,"142"],["May",151,"151"],["Jun",164,"164"],["Jul",172,"172"],["Aug",184,"184"]],
    splitTitle:"Where they came from",
    split:[["Referral","78","42%",1],["Search","61","33%",0],["Trade shows","29","16%",0],["Direct","16","9%",0]],
@@ -738,24 +760,24 @@ const ASPECT_DEFS = [
      ["New accounts","12","+4","up","opened",[.2,.3,.24,.4,.36,.5,.44,.6,.7]],
      ["Cost per enquiry","€18.40","−€2.10","up","blended",[.8,.76,.7,.66,.6,.56,.5,.46,.4]],
      ["Repeat rate","68%","+3pt","up","ordering again",[.5,.54,.58,.56,.62,.64,.66,.7,.74]]]},
-  {id:"operations", label:"Operations", color:"#dcded6", owner:"SÉAMUS BYRNE", description:"Installers, vans, site visits and the work queue.",
-   kind:"stacked", legend:["Head office","Ballincollig depot","Mallow yard"], stacked:[["Sep",[34,28,9]],["Oct",[36,30,9]],["Nov",[39,32,10]],["Dec",[37,31,10]],["Jan",[32,27,8]],["Feb",[35,29,9]],["Mar",[40,33,10]],["Apr",[43,35,11]],["May",[46,37,12]],["Jun",[49,39,12]],["Jul",[52,42,13]],["Aug",[64,48,14]]], chartTitle:"Jobs completed by month", chartUnit:"JOBS",
+  {id:"operations", label:"Operations", color:"#dcded6", owner:"JOHN CULKIN", description:"Stock, transfers, loan sets and the order queue.",
+   kind:"stacked", legend:["Main stockroom","Harbour consignment site","Riverpark site"], stacked:[["Sep",[34,28,9]],["Oct",[36,30,9]],["Nov",[39,32,10]],["Dec",[37,31,10]],["Jan",[32,27,8]],["Feb",[35,29,9]],["Mar",[40,33,10]],["Apr",[43,35,11]],["May",[46,37,12]],["Jun",[49,39,12]],["Jul",[52,42,13]],["Aug",[64,48,14]]], chartTitle:"Jobs completed by month", chartUnit:"JOBS",
    chart:[["Sep",88,"88"],["Oct",94,"94"],["Nov",102,"102"],["Dec",96,"96"],["Jan",84,"84"],["Feb",91,"91"],["Mar",104,"104"],["Apr",112,"112"],["May",118,"118"],["Jun",121,"121"],["Jul",124,"124"],["Aug",126,"126"]],
    splitTitle:"By location",
-   split:[["Head office","64","51%",1],["Ballincollig depot","48","38%",0],["Mallow yard","14","11%",0]],
-   tableCols:["Installer","Jobs","On time","Location"],
-   table:[["Séamus Byrne","41","94%","Ballincollig"],["Tom Walsh","34","88%","Head office"],["Niamh Cronin","28","96%","Head office"],["Unassigned","4","—","Ballincollig"]],
+   split:[["Main stockroom","64","51%",1],["Harbour consignment site","48","38%",0],["Riverpark site","14","11%",0]],
+   tableCols:["Person","Jobs","On time","Location"],
+   table:[["Rory Whelan","41","94%","Harbour"],["John Culkin","34","88%","Main stockroom"],["Aileen Cahalane","28","96%","Main stockroom"],["Unassigned","4","n/a","Harbour"]],
    metrics:[["Jobs completed","126","+4","up","30 days",[.5,.6,.5,.66,.6,.7,.66,.76,.84]],
      ["Overdue tasks","11","+3","down","past due",[.3,.36,.3,.44,.4,.5,.56,.7,.85]],
      ["Visits completed","38","+11%","up","30 days",[.4,.5,.6,.5,.66,.6,.72,.8,.9]],
-     ["Installer hours","84%","−2pt","down","billable",[.8,.78,.8,.76,.78,.74,.76,.72,.7]]]},
+     ["Scan coverage","86%","−2pt","down","lines scanned",[.8,.78,.8,.76,.78,.74,.76,.72,.7]]]},
   {id:"finance", label:"Finance", color:"#7fd8a4", owner:"AOIFE NOLAN", description:"Cash in, debt ageing and margin after cost.",
    kind:"area", chartTitle:"Cash collected by month", chartUnit:"EUR",
    chart:[["Sep",252,"€0k"],["Oct",268,"€0k"],["Nov",296,"€0k"],["Dec",318,"€0k"],["Jan",246,"€0k"],["Feb",264,"€0k"],["Mar",288,"€0k"],["Apr",306,"€0k"],["May",324,"€0k"],["Jun",342,"€0k"],["Jul",358,"€0k"],["Aug",368,"€0k"]],
    splitTitle:"Debt by age",
-   split:[["0–30 days","€184.2k","61%",1],["31–60 days","€82.4k","27%",0],["61–90 days","€28.6k","9%",0],["90 days plus","€12.6k","4%",0]],
+   split:[["0 to 30 days","€184.2k","61%",1],["31 to 60 days","€82.4k","27%",0],["61 to 90 days","€28.6k","9%",0],["90 days plus","€12.6k","4%",0]],
    tableCols:["Account","Balance","Change","Oldest"],
-   table:[["Dunne & Sons Ltd","€28,410","+42.0%","74 days"],["Fitzgerald Heating","€9,240","+11.2%","63 days"],["Riverside Developments","€3,560","−4.4%","61 days"],["Glanmire Mechanical","€1,180","−22.0%","8 days"]],
+   table:[["South Dublin Surgical Centre","€8,750","+42.0%","74 days"],["Liffey Surgical Clinic","€9,240","+11.2%","63 days"],["Eastgate Orthopaedics","€3,560","−4.4%","61 days"],["Atlantic Sports Surgery","€1,180","−22.0%","8 days"]],
    metrics:[["Cash collected","€368,140","+4.1%","up","30 days",[.5,.56,.5,.62,.58,.68,.66,.74,.8]],
      ["Overdue debt","€41,200","+€8,410","down","60 days plus",[.3,.34,.4,.38,.46,.5,.6,.7,.84]],
      ["Gross margin","31.4%","−0.6pt","down","vs last month",[.7,.72,.7,.68,.68,.66,.64,.62,.6]],
@@ -766,7 +788,7 @@ const ASPECT_DEFS = [
    splitTitle:"By cause",
    split:[["Install fault","3","43%",1],["Part failure","2","29%",0],["User error","2","28%",0]],
    tableCols:["Site","Callbacks","First-visit fix","Cost"],
-   table:[["Ó Riain, Glanmire","2","50%","€840"],["Casey Builders","2","100%","€410"],["Fitzgerald Heating","2","100%","€1,240"],["Kelleher, Cobh","1","100%","€650"]],
+   table:[["Riverpark Day Surgery","2","50%","€840"],["Harbour Orthopaedic Clinic","2","100%","€410"],["Liffey Surgical Clinic","2","100%","€1,240"],["Westside Specialist Centre","1","100%","€650"]],
    metrics:[["Open callbacks","7","−2","up","live",[.6,.58,.54,.5,.48,.44,.4,.38,.34]],
      ["First-visit fix","82%","+4pt","up","of callbacks",[.5,.54,.56,.6,.6,.66,.7,.74,.8]],
      ["Warranty cost","€3,140","−€420","up","30 days",[.7,.66,.62,.6,.54,.5,.46,.44,.4]],
@@ -780,83 +802,83 @@ const FILTER_GROUPS = [
 ];
 
 const OPS_DEFS = [
-  {id:"o1", name:"Weekly management report", kind:"report", owner:"Chief of Staff", ownerKind:"agent", initials:"CS",
-   trigger:"Mon, 08:00", triggerKind:"schedule", next:"3 days", last:"Sent to 4 people", status:"healthy", rate:98, on:true,
-   what:"Pulls last week's numbers from every area, writes the commentary and sends one page to the management team before Monday's meeting.",
-   why:"The meeting used to start with twenty minutes of people reading numbers off their own screens.",
-   saved:"6 hours a month",
-   steps:[["Trigger","Every Monday at 08:00"],["Find","Last week's metrics across all six areas"],["Check","Flag anything moving more than 10%"],["Draft","Write the one-page commentary"],["Send","Email the management team"],["Update","File the report against the week"]],
-   runs:[["Mon 08:00","1m 12s","ok","4 recipients","€0.04"],["Mon 25 Aug 08:00","1m 04s","ok","4 recipients","€0.04"],["Mon 18 Aug 08:00","58s","ok","4 recipients","€0.03"]]},
-  {id:"o2", name:"Chase unpaid invoices", kind:"automation", owner:"Finance Agent", ownerKind:"agent", initials:"FA",
-   trigger:"Daily, 09:00", triggerKind:"schedule", next:"Tomorrow", last:"3 drafts waiting", status:"approval", rate:94, on:true,
-   what:"Finds invoices past 14 days, excludes anything disputed, drafts a reminder in your tone and parks it for the finance manager.",
-   why:"Chasing was happening in bursts, so the oldest debt got the least attention.",
-   saved:"11 hours a month",
-   steps:[["Trigger","Every weekday at 09:00"],["Find","Unpaid invoices older than 14 days"],["Check","Exclude disputed invoices"],["Draft","Create personalised reminders"],["Approval","Finance manager reviews","gate"],["Send","Email the customer"],["Update","Record the activity in Pulse"]],
-   runs:[["Today 09:00","42s","partial","3 of 7 drafted","€0.02","4 organisations have no billing email"],["Yesterday 09:00","51s","ok","6 sent","€0.03"],["Mon 09:00","47s","ok","5 sent","€0.03"]]},
-  {id:"o3", name:"New enquiry follow-up", kind:"automation", owner:"Sales Agent", ownerKind:"agent", initials:"SA",
-   trigger:"New lead created", triggerKind:"event", next:"Event-based", last:"11 followed up today", status:"healthy", rate:99, on:true,
-   what:"Answers a new enquiry within minutes, asks the two questions the counter always needs, and creates the quote task.",
-   why:"Enquiries arriving after 5pm were sitting until the next morning.",
-   saved:"14 hours a month",
-   steps:[["Trigger","A lead is created in Pulse"],["Find","Match against existing organisations"],["Draft","Write the first reply"],["Send","Email the enquiry"],["Update","Create a quote task for the counter"]],
-   runs:[["Today 16:20","6s","ok","1 lead","€0.01"],["Today 15:02","7s","ok","1 lead","€0.01"],["Today 11:48","6s","ok","1 lead","€0.01"]]},
-  {id:"o4", name:"Certificate renewal reminder", kind:"routine", owner:"Operations", ownerKind:"person", initials:"TW",
-   trigger:"60 days before expiry", triggerKind:"event", next:"14:20", last:"Failed — missing contact", status:"failed", rate:71, on:true,
-   what:"Watches every installer certificate and insurance document, and gives sixty days' notice before one lapses.",
-   why:"A lapsed certificate stopped two jobs last year.",
-   saved:"3 hours a month",
-   steps:[["Trigger","60 days before a document expires"],["Find","The owner of the certificate"],["Check","Has a renewal already been booked?"],["Send","Notify the owner and Operations"],["Update","Create the renewal task"]],
-   runs:[["Today 14:20","3s","failed","0 of 2","€0.00","No contact on file for Mallow yard"],["Yesterday 14:20","4s","failed","0 of 1","€0.00","No contact on file for Mallow yard"],["Fri 14:20","5s","ok","1 notified","€0.01"]]},
-  {id:"o5", name:"Morning briefing", kind:"routine", owner:"Briefing Agent", ownerKind:"agent", initials:"BR",
-   trigger:"Weekdays, 07:00", triggerKind:"schedule", next:"Tomorrow", last:"Delivered 07:02", status:"healthy", rate:100, on:true,
-   what:"Reads the whole business overnight and tells you the two things that actually need you.",
-   why:"You were opening six screens before your first coffee.",
-   saved:"9 hours a month",
-   steps:[["Trigger","Every weekday at 07:00"],["Find","Overnight changes across cash, work and approvals"],["Check","Drop anything already handled"],["Draft","Write the briefing"],["Send","Post to Home and WhatsApp"]],
-   runs:[["Today 07:00","22s","ok","1 briefing","€0.02"],["Yesterday 07:00","19s","ok","1 briefing","€0.02"],["Mon 07:00","24s","ok","1 briefing","€0.02"]]},
-  {id:"o6", name:"Weekly stock check", kind:"task", owner:"Stock Watch", ownerKind:"agent", initials:"SW",
-   trigger:"Thursdays, 09:00", triggerKind:"schedule", next:"Thu 09:00", last:"2 lines flagged", status:"healthy", rate:96, on:true,
-   what:"Compares reorder points against what the week's jobs need and raises the purchase order lines.",
-   why:"Two jobs were rescheduled in June for parts nobody had ordered.",
-   saved:"5 hours a month",
-   steps:[["Trigger","Every Thursday at 09:00"],["Find","Lines below reorder point"],["Check","What this week's jobs need"],["Approval","Buyer confirms the order","gate"],["Update","Raise the purchase order"]],
-   runs:[["Thu 09:00","31s","ok","2 lines","€0.02"],["Thu 21 Aug 09:00","28s","ok","1 line","€0.02"]]},
-  {id:"o7", name:"Xero invoice sync", kind:"automation", owner:"Ops Watchdog", ownerKind:"agent", initials:"OW",
-   trigger:"Hourly", triggerKind:"schedule", next:"Paused", last:"Token expired", status:"failed", rate:62, on:false,
-   what:"Posts every finalised invoice into Xero and reconciles what came back.",
-   why:"Manual re-entry was the single biggest source of mismatched invoices.",
-   saved:"18 hours a month",
-   steps:[["Trigger","Every hour"],["Find","Invoices not yet in Xero"],["Send","Post to Xero","external"],["Check","Reconcile what came back"],["Update","Mark them synced"]],
-   runs:[["Today 02:14","1.2s","failed","0 of 148","€0.00","invalid_grant: refresh token expired 27 February"],["Today 01:14","1.1s","failed","0 of 141","€0.00","invalid_grant: refresh token expired 27 February"],["Yesterday 23:14","4s","ok","12 posted","€0.01"]]},
-  {id:"o8", name:"Weekend on-call handover", kind:"routine", owner:"Chief of Staff", ownerKind:"agent", initials:"CS",
-   trigger:"Fri, 16:30", triggerKind:"schedule", next:"Fri 16:30", last:"Sent to 3 people", status:"healthy", rate:97, on:true,
-   what:"Writes the weekend handover: open jobs, who is on call, and anything a customer is waiting on.",
-   why:"Weekend calls were being answered by whoever picked up, with no context.",
-   saved:"4 hours a month",
-   steps:[["Trigger","Every Friday at 16:30"],["Find","Open jobs and unanswered customers"],["Draft","Write the handover note"],["Send","WhatsApp the on-call rota"]],
-   runs:[["Fri 16:30","18s","ok","3 recipients","€0.02"],["Fri 15 Aug 16:30","21s","ok","3 recipients","€0.02"]]},
-  {id:"o9", name:"Timesheet reminder", kind:"task", owner:"Operations", ownerKind:"person", initials:"TW",
-   trigger:"Fri, 15:00", triggerKind:"schedule", next:"Fri 15:00", last:"9 of 12 submitted", status:"approval", rate:88, on:true,
-   what:"Nudges anyone who has not filed hours, then sends Operations the list still outstanding.",
-   why:"Payroll was chasing the same four people every week.",
-   saved:"3 hours a month",
-   steps:[["Trigger","Every Friday at 15:00"],["Find","Staff with no hours filed"],["Send","Remind each person"],["Approval","Operations signs off the week","gate"]],
-   runs:[["Fri 15:00","12s","partial","9 of 12","€0.01"],["Fri 15 Aug 15:00","11s","ok","12 of 12","€0.01"]]},
-  {id:"o10", name:"Overnight backup check", kind:"automation", owner:"Ops Watchdog", ownerKind:"agent", initials:"OW",
-   trigger:"Daily, 03:00", triggerKind:"schedule", next:"Tonight", last:"All systems clean", status:"healthy", rate:100, on:true,
-   what:"Confirms every nightly backup completed and the restore test passed, and raises an alert if not.",
-   why:"A failed backup went unnoticed for eleven days in January.",
-   saved:"2 hours a month",
-   steps:[["Trigger","Every day at 03:00"],["Check","Every backup job completed"],["Check","Last restore test passed"],["Send","Alert only if something failed"]],
-   runs:[["Today 03:00","8s","ok","6 jobs","€0.00"],["Yesterday 03:00","9s","ok","6 jobs","€0.00"]]},
-  {id:"o11", name:"Month-end close pack", kind:"report", owner:"Finance Agent", ownerKind:"agent", initials:"FA",
-   trigger:"1st, 07:00", triggerKind:"schedule", next:"1 Sep 07:00", last:"Delivered 1 Aug", status:"healthy", rate:95, on:true,
-   what:"Assembles the close pack: aged debt, margin by area, cash position and the variance commentary.",
-   why:"Close took three days of copying between spreadsheets.",
-   saved:"16 hours a month",
-   steps:[["Trigger","First of the month at 07:00"],["Find","Last month's ledger and margin data"],["Check","Reconcile against the bank"],["Draft","Write the variance commentary"],["Send","Email the pack to Finance"]],
-   runs:[["1 Aug 07:00","3m 42s","ok","1 pack","€0.09"],["1 Jul 07:00","3m 51s","ok","1 pack","€0.09"]]}
+  {id:"o1", name:"Morning briefing", kind:"routine", owner:"Briefing Agent", ownerKind:"agent", initials:"BR",
+   trigger:"Weekdays, 07:00", triggerKind:"schedule", next:"Tomorrow 07:00", last:"Delivered 07:02", status:"healthy", rate:100, on:true,
+   what:"Reads stock, orders, sales and finance overnight and tells Graham the few things that need a person today.",
+   why:"The answers were spread across the ERP, spreadsheets and people's heads.",
+   saved:"6 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every weekday at 07:00"],["Find","Overnight changes across stock, orders, sales and cash"],["Check","Drop anything already handled"],["Draft","Write the briefing with links"],["Send","Post to Home"]],
+   runs:[["Today 07:00","22s","ok","1 briefing","€0.02"],["Yesterday 07:00","19s","ok","1 briefing","€0.02"],["Tue 07:00","24s","ok","1 briefing","€0.02"]]},
+  {id:"o2", name:"Hospital stock watch", kind:"routine", owner:"Stock & Traceability Agent", ownerKind:"agent", initials:"ST",
+   trigger:"Daily, 06:00", triggerKind:"schedule", next:"Tomorrow 06:00", last:"4 lines below par", status:"approval", rate:97, on:true,
+   what:"Compares every consignment line with its par level and drafts the transfer that tops it up from the main stockroom.",
+   why:"Sites ran short before anyone noticed, then needed urgent couriers.",
+   saved:"5 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every day at 06:00"],["Find","Consignment lines below par"],["Check","Central stock, first-expiring lot"],["Draft","Transfer request"],["Approval","Operations Director approves","gate"],["Update","Move stock and record the movement"]],
+   runs:[["Today 06:00","31s","ok","4 lines flagged","€0.02"],["Yesterday 06:00","28s","ok","3 lines flagged","€0.02"]]},
+  {id:"o3", name:"Overdue follow-up nudges", kind:"automation", owner:"Sales Agent", ownerKind:"agent", initials:"SA",
+   trigger:"Weekdays, 08:15", triggerKind:"schedule", next:"Tomorrow 08:15", last:"7 overdue flagged", status:"healthy", rate:99, on:true,
+   what:"Finds opportunities whose next step is overdue and puts a suggested follow-up on the owner's My Day.",
+   why:"Opportunities went quiet for weeks between field visits.",
+   saved:"8 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every weekday at 08:15"],["Find","Open opportunities past their next-step date"],["Draft","Suggested follow-up per rep"],["Update","Show on My Day and the planner"]],
+   runs:[["Today 08:15","6s","ok","7 flagged","€0.01"],["Yesterday 08:15","7s","ok","6 flagged","€0.01"]]},
+  {id:"o4", name:"Order scan check", kind:"automation", owner:"Order Flow Agent", ownerKind:"agent", initials:"OF",
+   trigger:"Hourly, 08:00 to 17:00", triggerKind:"schedule", next:"15:00", last:"SO-1047 at 3 of 5", status:"healthy", rate:98, on:true,
+   what:"Checks every order due out today for unscanned lines and missing lot, serial or expiry before the courier cut-off.",
+   why:"Orders were held at the door for a missing lot number.",
+   saved:"4 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every hour in working time"],["Find","Orders due out today"],["Check","Unscanned lines and missing identifiers"],["Send","Alert the order owner"]],
+   runs:[["Today 14:00","3s","ok","1 at risk","€0.00"],["Today 13:00","3s","ok","1 at risk","€0.00"]]},
+  {id:"o5", name:"Invoice reminder drafts", kind:"automation", owner:"Finance Agent", ownerKind:"agent", initials:"FA",
+   trigger:"Daily, 08:30", triggerKind:"schedule", next:"Tomorrow 08:30", last:"12 overdue, 1 drafted", status:"approval", rate:95, on:true,
+   what:"Drafts reminders for invoices past due. Margaret reviews and sends them; Pulse never contacts a customer itself.",
+   why:"Chasing happened in bursts, so the oldest debt got the least attention.",
+   saved:"5 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every day at 08:30"],["Find","Invoices past due"],["Check","Exclude disputed invoices"],["Draft","Reminder in Hogan's tone"],["Approval","Margaret reviews and sends","gate"],["Update","Log the reminder"]],
+   runs:[["Today 08:30","9s","ok","1 drafted","€0.01"],["Yesterday 08:30","8s","ok","2 drafted","€0.01"]]},
+  {id:"o6", name:"Three-way bill match", kind:"automation", owner:"Purchasing Agent", ownerKind:"agent", initials:"PA",
+   trigger:"When a supplier bill arrives", triggerKind:"event", next:"Event-based", last:"BILL-2034 mismatch", status:"approval", rate:96, on:true,
+   what:"Matches each supplier bill to its purchase order and goods receipt, and holds any bill that does not match for a person.",
+   why:"Over-billing was only spotted at month-end, if at all.",
+   saved:"6 hours a month (estimate, to be measured)",
+   steps:[["Trigger","A supplier bill is received"],["Find","Its purchase order and goods receipt"],["Check","Quantity and price"],["Approval","Margaret resolves mismatches","gate"],["Update","Mark matched or held"]],
+   runs:[["Today 09:05","2s","partial","BILL-2034 held: billed 14, received 12","€0.00"],["Tue 11:20","2s","ok","BILL-2031 matched","€0.00"]]},
+  {id:"o7", name:"ERP nightly read (demo)", kind:"automation", owner:"Ops Watchdog", ownerKind:"agent", initials:"OW",
+   trigger:"Nightly, 02:00", triggerKind:"schedule", next:"Paused", last:"Connection not verified", status:"healthy", rate:0, on:false,
+   what:"Would read orders, customers, products and stock movements from the current ERP. Paused until the connection is verified.",
+   why:"Pulse sits above the ERP rather than replacing it.",
+   saved:"0 hours (not running)",
+   steps:[["Trigger","Every night at 02:00"],["Find","Changed records in the ERP"],["Update","Refresh Pulse records"]],
+   runs:[["Not run","-","partial","paused: demo data in use","€0.00"]]},
+  {id:"o8", name:"Friday team review pack", kind:"report", owner:"Sales Agent", ownerKind:"agent", initials:"SA",
+   trigger:"Fridays, 15:00", triggerKind:"schedule", next:"Fri 15:00", last:"Sent to Graham", status:"healthy", rate:100, on:true,
+   what:"Pulls the week's pipeline, missed commitments and next week's drafted plans into one page for Graham's Friday review.",
+   why:"Graham wants to review the whole team on Friday and plan Monday to Friday.",
+   saved:"4 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every Friday at 15:00"],["Find","This week's activity and next week's drafts"],["Draft","The review pack"],["Send","Post to Graham's Home"]],
+   runs:[["Fri 13 Nov 15:00","41s","ok","1 pack","€0.03"],["Fri 6 Nov 15:00","38s","ok","1 pack","€0.03"]]},
+  {id:"o9", name:"Expiry and certificate watch", kind:"routine", owner:"Quality & Compliance Agent", ownerKind:"agent", initials:"QC",
+   trigger:"Mondays, 07:30", triggerKind:"schedule", next:"Mon 07:30", last:"1 CE certificate in 60 days", status:"healthy", rate:100, on:true,
+   what:"Lists lots expiring in the next 90 days and supplier certificates nearing expiry, for a person to act on.",
+   why:"Short-dated stock was found at sites too late to swap.",
+   saved:"3 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Every Monday at 07:30"],["Find","Lots and certificates near expiry"],["Send","Flag to Operations and Quality"]],
+   runs:[["Mon 07:30","12s","ok","4 lots, 1 certificate","€0.01"]]},
+  {id:"o10", name:"Rental return reminders", kind:"task", owner:"Ops Watchdog", ownerKind:"agent", initials:"OW",
+   trigger:"Two days before a hire ends", triggerKind:"event", next:"Event-based", last:"RN-0204 due 20 Nov", status:"healthy", rate:100, on:true,
+   what:"Reminds the team when a NICE1 hire is ending and queues cleaning and inspection for the returned unit.",
+   why:"Units sat uncleaned between hires.",
+   saved:"2 hours a month (estimate, to be measured)",
+   steps:[["Trigger","Two days before hire end"],["Send","Reminder to John"],["Update","Queue cleaning and inspection"]],
+   runs:[["Today 09:00","1s","ok","1 reminder","€0.00"]]},
+  {id:"o11", name:"Month-end pack", kind:"report", owner:"Finance Agent", ownerKind:"agent", initials:"FA",
+   trigger:"1st, 07:00", triggerKind:"schedule", next:"1 Dec 07:00", last:"Delivered 1 Nov", status:"healthy", rate:95, on:true,
+   what:"Assembles revenue, cost of sales, gross margin, EBITDA and aged debt into one pack. Figures depend on the accounting integration.",
+   why:"Graham wanted EBITDA and margins without waiting for the accountant.",
+   saved:"8 hours a month (estimate, to be measured)",
+   steps:[["Trigger","First of the month at 07:00"],["Find","Last month's figures"],["Check","Reconcile against the bank"],["Draft","The commentary"],["Send","Post to Graham and Margaret"]],
+   runs:[["1 Nov 07:00","3m 42s","ok","1 pack","€0.09"],["1 Oct 07:00","3m 51s","ok","1 pack","€0.09"]]}
 ];
 
 const OPS_FILTERS = [
@@ -865,29 +887,25 @@ const OPS_FILTERS = [
 ];
 
 const WORK_SECTIONS = [
-  {id:"tasks", label:"Tasks", blurb:"Everything assigned to you or your team, in one permission-filtered list.",
-   views:["All tasks","Due tasks","Review","Done"], filters:["Due date","Any status","Anyone","Any due date"]},
-  {id:"approvals", label:"Approvals", blurb:"Requests and their steps. Every decision is written as the person who made it.",
-   views:["Awaiting you","Awaiting others","Decided"], filters:["Raised date","Any value","Anyone"]},
-  {id:"workflows", label:"Workflows", blurb:"Automations and agent routines — what runs on its own, and who owns it.",
-   views:[], filters:[]},
-  {id:"schedules", label:"Schedules", blurb:"The team calendar: when recurring work fires and what it costs the week.",
-   views:[], filters:[]}
+  {id:"tasks", label:"My Tasks", blurb:"Everything assigned to you or your team.", views:["All tasks","Due tasks","Review","Done"], filters:["Due date","Any status","Anyone","Any due date"]},
+  {id:"approvals", label:"Approvals", blurb:"Requests and their steps. Every decision is written as the person who made it.", views:["Awaiting you","Awaiting others","Decided"], filters:["Raised date","Any value","Anyone"]},
+  {id:"workflows", label:"Workflows", blurb:"Routines and automations: what runs on its own, who owns it, and where it waits for a person.", views:[], filters:[]},
+  {id:"schedules", label:"Schedule", blurb:"When recurring work fires: briefings, stock watch, follow-up nudges and month-end.", views:[], filters:[]}
 ];
 
 const WORK_TASKS = [
-  {id:"w1", title:"Chase INV-10428 — Dunne & Sons", status:"In progress", priority:"High", who:"AN",
-   due:"2d overdue", late:true, client:"Dunne & Sons Ltd", day:"Today", mins:"25 mins", view:"Due tasks"},
-  {id:"w2", title:"Reassign Van 04 jobs off Ballincollig", status:"In progress", priority:"High", who:"MK",
-   due:"Due today", late:false, client:"Ballincollig depot", day:"Today", mins:"50 mins", view:"Due tasks"},
-  {id:"w3", title:"Approve purchase order PO-4471", status:"Review", priority:"Medium", who:"MK",
-   due:"Due 12:00", late:false, client:"Munster Plumbing", day:"Today", mins:"15 mins", view:"Review"},
+  {id:"w1", title:"Chase INV-6128 · South Dublin Surgical Centre", status:"In progress", priority:"High", who:"AN",
+   due:"2d overdue", late:true, client:"South Dublin Surgical Centre", day:"Today", mins:"25 mins", view:"Due tasks"},
+  {id:"w2", title:"Reassign the courier jobs off Harbour", status:"In progress", priority:"High", who:"MK",
+   due:"Due today", late:false, client:"Harbour consignment site", day:"Today", mins:"50 mins", view:"Due tasks"},
+  {id:"w3", title:"Approve purchase order PO-341", status:"Review", priority:"Medium", who:"MK",
+   due:"Due 12:00", late:false, client:"Halcyon Orthopaedics", day:"Today", mins:"15 mins", view:"Review"},
   {id:"w4", title:"Sign off August counter stocktake", status:"Not started", priority:"Medium", who:"SB",
-   due:"No due date", late:false, client:"Head office", day:"Any day", mins:"Mins", view:"All tasks"},
-  {id:"w5", title:"Ballincollig lease decision", status:"Not started", priority:"High", who:"MK",
-   due:"Thursday", late:false, client:"Ballincollig depot", day:"Thu", mins:"1 hour", view:"All tasks"},
-  {id:"w6", title:"VAT return — August", status:"Done", priority:"Medium", who:"AN",
-   due:"Filed Friday", late:false, client:"Head office", day:"Fri", mins:"2 hours", view:"Done", done:true}
+   due:"No due date", late:false, client:"Main stockroom", day:"Any day", mins:"Mins", view:"All tasks"},
+  {id:"w5", title:"Harbour lease decision", status:"Not started", priority:"High", who:"MK",
+   due:"Thursday", late:false, client:"Harbour consignment site", day:"Thu", mins:"1 hour", view:"All tasks"},
+  {id:"w6", title:"VAT return · August", status:"Done", priority:"Medium", who:"AN",
+   due:"Filed Friday", late:false, client:"Main stockroom", day:"Fri", mins:"2 hours", view:"Done", done:true}
 ];
 
 const WORKFLOWS = [
@@ -910,11 +928,11 @@ const WORKFLOWS = [
 ];
 
 const SCHEDULES = [
-  {id:"s1", name:"Morning briefing", cadence:"Every weekday · 07:00", next:"Tomorrow 07:00", owner:"Briefing agent", on:true, day:1},
-  {id:"s2", name:"Overdue invoice reminder", cadence:"Daily · 08:00", next:"Tomorrow 08:00", owner:"Credit Control", on:true, day:1},
-  {id:"s3", name:"Xero invoice sync", cadence:"Hourly", next:"Paused", owner:"Ops Watchdog", on:false, day:0},
-  {id:"s4", name:"Weekly stock check", cadence:"Thursdays · 09:00", next:"Thu 09:00", owner:"Stock Watch", on:true, day:3},
-  {id:"s5", name:"Month-end close", cadence:"Last working day · 17:00", next:"Fri 17:00", owner:"Month-end close", on:true, day:4}
+  {id:"s1", name:"Morning briefing", cadence:"Every weekday · 07:00", next:"Tomorrow 07:00", owner:"Briefing Agent", on:true, day:1},
+  {id:"s2", name:"Hospital stock watch", cadence:"Daily · 06:00", next:"Tomorrow 06:00", owner:"Stock & Traceability Agent", on:true, day:1},
+  {id:"s3", name:"ERP nightly read (demo)", cadence:"Nightly · 02:00", next:"Paused", owner:"Ops Watchdog", on:false, day:0},
+  {id:"s4", name:"Friday team review pack", cadence:"Fridays · 15:00", next:"Fri 15:00", owner:"Sales Agent", on:true, day:4},
+  {id:"s5", name:"Month-end pack", cadence:"1st of the month · 07:00", next:"1 Dec 07:00", owner:"Finance Agent", on:true, day:0}
 ];
 
 const WIDGET_DEFS = [["inbox","Action inbox"],["work","My work"],["activity","Activity"],["kpi","Today's numbers"],["visits","Site visits"]];
@@ -929,41 +947,41 @@ const ANSWER_STYLES = ["Short answers","Show the working","Ask before acting"];
 /* Every context source and every registered tool the agent could be granted —
    the builder shows the whole catalogue, grouped, rather than a sample. */
 const CONTEXT_DEFS = [
-  ["Organisations","records","Accounts, limits, payment behaviour"],
-  ["People","records","Contacts and internal staff"],
-  ["Files","records","Indexed documents and certificates"],
+  ["Accounts","records","Hospitals, clinics and their contacts"],
+  ["People","records","Staff and external contacts"],
+  ["Files","records","Agreements, certificates, SOPs"],
   ["Tasks","work","Queues, owners, due dates"],
-  ["Site visits","work","Bookings, installers, outcomes"],
+  ["Stock & lots","work","Locations, par levels, lots, serials, expiry"],
   ["Approvals","work","What is waiting on a decision"],
+  ["Orders","money","Sales and purchase orders"],
   ["Invoices","money","Issued, paid, past due"],
-  ["Quotes","money","Sent, accepted, expired"],
-  ["Payments","money","Receipts and allocations"],
+  ["Supplier bills","money","Matched, held, paid"],
   ["Activity log","system","Every event, agent and human"],
-  ["Modules","system","What this client has installed"],
+  ["Modules","system","What Hogan has switched on"],
   ["Insights","system","Saved metrics and trends"]
 ];
 const CONTEXT_SOURCES = CONTEXT_DEFS.map(c => c[0]);
 const SKILL_DEFS = [
   ["Search records","read"],["Summarise activity","read"],["Read invoices","read"],
-  ["Read site visits","read"],["Check permissions","read"],
+  ["Read stock and lots","read"],["Check permissions","read"],
   ["Draft email","write"],["Create task","write"],["Update record","write"],
-  ["Schedule visit","write"],["Raise approval","write"],
-  ["Send email","external"],["Send WhatsApp","external"],["Post to Xero","external"],["Push to HubSpot","external"]
+  ["Propose transfer","write"],["Raise approval","write"],
+  ["Send email (a person sends)","external"],["Post to accounting (blocked)","external"],["Write to ERP (blocked)","external"]
 ];
 /* The two questions the agent asks back once it knows the job. */
 const TRAIN_PHASES = [
-  ["Reading the whole ontology", "4,820 records"],
-  ["Learning how this business words things", "organisation → merchant"],
-  ["Researching the trade-supply domain", "12 sources"],
+  ["Reading the whole ontology", "1,240 units · 132 products · 20 accounts"],
+  ["Learning how Hogan words things", "organisation → account / hospital"],
+  ["Studying medical-device distribution", "lots, serials, UDI, consignment"],
   ["Writing its own system prompt", "1,240 tokens"]
 ];
 const BRIEF_QUESTIONS = [
-  {title:"What should it cover?", sub:"Pick as many as you like — we can refine later.",
-   options:[["Calendar","Meetings and what is coming up"],["Email","Unread and actionable inbox items"],
-            ["Records","Accounts that moved since yesterday"],["Money","Cash, overdue and anything at risk"],
+  {title:"What should it cover?", sub:"Pick as many as you like. We can refine later.",
+   options:[["Stock","Hospital par levels, lots and expiry"],["Orders","Picking, scans and dispatch"],
+            ["Accounts","Hospitals that moved since yesterday"],["Money","Cash, overdue and anything at risk"],
             ["Something else","Tell me in the next message"]]},
   {title:"When should it land?", sub:"One is enough to start.",
-   options:[["Every morning 07:30","Before the yard opens"],["Weekdays 08:00","Monday to Friday only"],
+   options:[["Every morning 07:30","Before the first theatre list"],["Weekdays 08:00","Monday to Friday only"],
             ["Only when something changes","Event-driven, no noise"],["On demand","When you ask for it"]]}
 ];
 /* The words under a name, keyed to the same state the face lights with. */
@@ -986,14 +1004,14 @@ const FACE_TINTS = [
 
 /* ---- ontology graph: generation, Dijkstra traversal, canvas render ---- */
 const CLUSTERS = [
-  ["Organisations", "#c8f04b", 0.00, 0.62, 46],
-  ["People",        "#6ad0f0", 0.90, 0.70, 52],
-  ["Files",         "#b06cf0", 1.75, 0.66, 58],
-  ["Tasks",         "#f0c04b", 2.55, 0.72, 44],
-  ["Invoices",      "#f0567f", 3.35, 0.60, 38],
-  ["Site visits",   "#5fe0a8", 4.15, 0.70, 40],
-  ["Locations",     "#f0803a", 4.95, 0.64, 30],
-  ["Approvals",     "#5f7cf0", 5.65, 0.72, 34]
+  ["Hospitals",      "#4A9DA5", 0.00, 0.62, 46],
+  ["People",         "#7FB8C9", 0.90, 0.70, 52],
+  ["Products",       "#9d8cf5", 1.75, 0.66, 58],
+  ["Lots",           "#f0c04b", 2.55, 0.72, 44],
+  ["Invoices",       "#f0567f", 3.35, 0.60, 38],
+  ["Movements",      "#5fe0a8", 4.15, 0.70, 40],
+  ["Orders",         "#f0803a", 4.95, 0.64, 30],
+  ["Suppliers",      "#6ad0f0", 5.65, 0.72, 34]
 ];
 
 function mulberry(seed){
